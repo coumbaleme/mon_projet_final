@@ -1,0 +1,56 @@
+{# templates/home/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil – [Votre BTP]{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <style>
+    .hero {
+      background: url('/images/chantier-hero.jpg') center/cover no-repeat;
+      height: 60vh; display:flex;
+      align-items:center; justify-content:center;
+      color:#fff; text-align:center;
+    }
+    .hero h1 { font-size:3rem; margin:0; }
+    .hero a { background:#ff6600; padding:1rem 2rem; color:#fff; border-radius:4px; text-decoration:none; margin-top:1rem; display:inline-block; }
+
+    .gallery {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+      gap:1rem; padding:2rem; background:#f5f5f5;
+    }
+    .gallery img { width:100%; height:150px; object-fit:cover; border-radius:6px; transition: transform .3s; }
+    .gallery img:hover { transform: scale(1.05); }
+
+    .mission {
+      text-align:center; padding:2rem 1rem; background:#fff;
+    }
+    footer { background:#0a2e50; color:#fff; text-align:center; padding:2rem 1rem; }
+    footer a { color:#ff6600; text-decoration:none; font-weight:bold; }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <div>
+      <h1>Construisons l’avenir, ensemble</h1>
+      <a href="#projects">Voir nos projets</a>
+    </div>
+  </section>
+
+  <section class="gallery" id="projects">
+    {% for projet in projets %}
+      <img src="{{ asset(projet.image) }}" alt="{{ projet.nom }}">
+    {% endfor %}
+  </section>
+
+  <section class="mission">
+    <h2>Notre mission</h2>
+    <p>Expertise, sécurité et durabilité au cœur de chaque chantier. Plus de 10 000 m² livrés avec passion.</p>
+  </section>
+
+  <footer>
+   
+  </footer>
+{% endblock %}
