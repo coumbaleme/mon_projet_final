@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits - BTP Consulting{% endblock %}
+
+{% block stylesheets %}
+  <style>
+    :root {
+      --bleu-Marine: #0a2e50;
+      --orange-CTA: #ff6600;
+      --gris-texte: #333;
+      --bg-clair: #f5f5f5;
+      --border-clair: #ddd;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--gris-texte);
+      background: var(--bg-clair);
+    }
+
+    h1, h2, h3, h4 { color: var(--bleu-Marine); font-weight: normal; }
+
+    a { color: var(--orange-CTA); text-decoration: none; }
+    .btn-cta {
+      background: var(--orange-CTA);
+      color: #fff;
+      padding: .75em 1.5em;
+      border-radius: 4px;
+      display: inline-block;
+      transition: opacity .3s;
+    }
+    .btn-cta:hover { opacity: .8; }
+
+    section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+
+    .hero {
+      background: url('{{ asset("images/hero-chantier.jpg") }}') center/cover no-repeat;
+      height: 65vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero h1 { font-size: 2.8rem; }
+    .hero h2 { font-size: 1.5rem; margin-top: .8rem; }
+    /* ... reste du CSS ... */
+  </style>
+{% endblock %}
+
+{% block body %}
+  <!-- HERO -->
+  <section class="hero">
+    <h1>BTP_Consulting S.A</h1>
+    <h2>Engagement • Qualité • Sécurité</h2>
+    <a href="mailto:contact@btp-consulting.com?subject=Demande de devis" class="btn-cta">Demander un devis</a>
+
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="about">
+    <h2>Qui sommes-nous ?</h2>
+    <p>
+      Fondée en 2025, BTP_Consulting développe des ouvrages durables avec rigueur et innovation.  
+      Nous sommes engagés dans une démarche QSE, sécurité & responsabilité environnementale sur chaque chantier.
+    </p>
+    <img src="https://www.andre-btp.com/wp-content/uploads/2022/07/OLIV6651-29-01-21-Olivier-Toussaint-2-1536x950.png" alt="Photo de l'équipe">
+  </section>
+
+  <!-- ÉQUIPE -->
+  <section id="team">
+    <h2>Notre équipe</h2>
+    <div class="team-grid">
+      {% for membre in [
+        {'nom': 'Machine_Lourds', 'poste': 'Directrice de projets', 'image': 'https://www.jcb-grandparis.fr/wp-content/uploads/vignette_brochure.jpg'},
+        {'nom': 'Matériel_detailler', 'poste': 'Chef d’équipe', 'image': 'https://www.battud.fr/images-site/vgn_materiel_chantier.png'},
+        {'nom': 'Etais_Coffrages', 'poste': 'Chef d’équipe', 'image': 'https://www.deltazur.pro/public/img/big/tais%204-0.jpg'}
+      ] %}
+        <div class="membre">
+          <img src="{{ membre.image }}" alt="Portrait {{ membre.nom }}">
+          <h3>{{ membre.nom }}</h3>
+          <p class="poste">{{ membre.poste }}</p>
+          <p>Coordonne les équipes terrain et assure le pilotage des travaux.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projects">
+    <h2>Études de cas & Projets marquants</h2>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <img src="https://www.vecteurplus.com/wp-content/uploads/2023/09/materiaux-btp-2.jpg" alt="">
+        <h4>Des briques de qualité</h4>
+        <p>Réaménagement complet du site avec respect des délais.</p>
+        <p class="testimonial">« Très professionnels, respect des engagements malgré la complexité. »</p>
+      </div>
+      <!-- autres projets... -->
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta">
+    <h2>Prêt à bâtir avec nous ?</h2>
+    <p>Faisons le point : étude rapide de votre projet, réponse sous 48 h, démarrage des travaux dans les meilleurs délais.</p>
+    <a href="{{path('app_contact')}}" class="btn-cta">Nous contacter</a>
+    
+  </section>
+{% endblock %}

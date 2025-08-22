@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil – BTP Consulting{% endblock %}
+
+{% block stylesheets %}
+<style>
+  :root {
+    --primary:#003366; /* bleu marine */
+    --accent:#ff6600;  /* orange CTA */
+    --text:#222;
+    --bg:#f7f7f7;
+  }
+
+  body { margin:0; font-family:sans-serif; color:var(--text); line-height:1.5; }
+
+  /* HERO */
+  header.hero {
+    background:url('{{ asset("images/image-hero.jpg") }}') center/cover no-repeat;
+    min-height:80vh; color:black; display:flex;
+    flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:0 1rem;
+  }
+  header.hero h1 { font-size:3rem; margin:0 0 .5rem; }
+  header.hero p { font-size:1.2rem; max-width:40rem; }
+  header.hero a.btn {
+    margin-top:1.5rem;
+    background:var(--accent); color:black; padding:1rem 2rem;
+    text-decoration:none; text-transform:uppercase; font-weight:700;
+    border-radius:6px;
+  }
+
+  /* STATS */
+  .stats-container {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:2rem; background:#fff; padding:3rem 1rem; text-align:center;
+  }
+  .stats { font-size:2rem; font-weight:700; color:var(--accent); }
+
+  /* TITRES SECTIONS */
+  .section-title { text-align:center; font-size:2rem; margin-bottom:2rem; }
+
+  /* SERVICES */
+  #services { padding: 80px 20px; background:#fdfdfd; text-align: center; }
+  #services .intro {
+    max-width: 800px; margin: 0 auto 2.5rem; font-size: 1.1rem; color: #555;
+  }
+  .services-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  }
+  .service-card img {
+    width: 70px; height: 70px; object-fit: contain; margin-bottom: 1rem;
+  }
+  .service-card h3 { color: var(--accent); margin-bottom: 0.5rem; }
+  .service-card p { font-size: 0.95rem; color: #444; }
+
+  /* PROJETS */
+  .projects { padding:3rem 1rem; background:var(--bg); }
+  .projects .grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem;
+  }
+  .project-card {
+    background:#fff; padding:1.5rem; border-radius:8px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1); overflow:hidden;
+  }
+  .project-card img {
+    width:100%; height:150px; object-fit:cover; transition:opacity .3s;
+  }
+  .project-card:hover img { opacity:.85; }
+  .testimonial { font-style:italic; color:#555; margin-top:1rem; }
+
+  /* ABOUT & CERTIFS */
+  .about, .certifications { background:#fff; padding:3rem 1rem; }
+  .certifications img { filter: grayscale(40%); }
+
+  /* FOOTER */
+  footer { background:var(--primary); color:#fff; padding:2rem 1rem; text-align:center; }
+  footer a.btn { background:var(--accent); color:#fff; padding:1rem 2rem; text-decoration:none; font-weight:700; border-radius:6px; }
+</style>
+{% endblock %}
+
+{% block body %}
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Construisez l’excellence avec BTP_Consulting</h1>
+    <p>Expertise BTP. Qualité certifiée. Résultats durables.</p>
+    <a href="mailto:contact@btp-consulting.com" class="btn">Demander un devis</a>
+  </header>
+
+  <!-- Statistiques -->
+  <section class="stats-container">
+    <div><div class="stats">+ 30</div><p>chantiers actifs</p></div>
+    <div><div class="stats">15 000 m²</div><p>construits/an</p></div>
+    <div><div class="stats">20</div><p>labels qualité</p></div>
+    <div><div class="stats">Certifié</div><p>Carte BTP</p></div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2 class="section-title">Nos services</h2>
+    <p class="intro">
+      Nous proposons des solutions complètes pour vos projets de construction,
+      rénovation et infrastructures, avec un engagement fort en qualité et sécurité.
+    </p>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2721/2721298.png" alt="Construction">
+        <h3>Construction</h3>
+        <p>Bâtiments modernes, durables et performants.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3522/3522280.png" alt="Rénovation">
+        <h3>Rénovation</h3>
+        <p>Modernisation avec respect des normes énergétiques.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063807.png" alt="Génie civil">
+        <h3>Génie civil</h3>
+        <p>Routes, ouvrages d’art et grandes infrastructures.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1086/1086475.png" alt="Conseil">
+        <h3>Conseil & Études</h3>
+        <p>Accompagnement technique et études de faisabilité.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section class="projects" id="projects">
+    <h2 class="section-title">Projets récents</h2>
+    <div class="grid">
+      <div class="project-card">
+        <img src="{{ asset('https://cdn.paris.fr/paris/2021/05/04/original-0412aeaad5b5038be94b8eeb7fa0a63b.jpg') }}" alt="Projet T3 gare Paris">
+        <h4>Gare T3 – Paris</h4>
+        <p>Réaménagement urbain complexe respecté dans les délais.</p>
+        <p class="testimonial">« Réactifs et rigoureux malgré le contexte. »</p>
+      </div>
+      <div class="project-card">
+        <img src="{{ asset('https://www.imm0bilier.com/wp-content/uploads/2022/12/logement-ile-de-france-1068x668.jpg') }}" alt="Logements Île-de-France">
+        <h4>Lotissement durable – Île-de-France</h4>
+        <p>60 logements BBC en zone péri-urbaine.</p>
+        <p class="testimonial">« Ponctualité et respect des budgets engagés. »</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section class="about" id="about">
+    <h2 class="section-title">À propos</h2>
+    <div style="max-width:800px; margin:0 auto; text-align:center;">
+      <p>Fondée en 2015, BTP_Consulting combine innovation et respect des normes pour assurer des ouvrages durables. Notre mission est de garantir sécurité, qualité et durabilité pour chaque projet.</p>
+      <a href="/a-propos">En savoir plus</a>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="certifications" id="certifications">
+    <h2 class="section-title">Certifications & Labels</h2>
+    <div style="display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;">
+      <img src="{{ asset('images/logo-iso.png') }}" alt="ISO" width="120">
+      <img src="{{ asset('images/logo-qs-btp.png') }}" alt="QSE" width="120">
+      <img src="{{ asset('images/logo-carte-btp.png') }}" alt="Carte BTP" width="120">
+    </div>
+
+    <a href="mailto:contact@btp-consulting.com" class="btn">Nous écrire</a>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>&copy; {{ "now"|date("Y") }} BTP_Consulting. Tous droits réservés.</p>
+    
+  </footer>
+{% endblock %}

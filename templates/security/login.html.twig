@@ -1,0 +1,134 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        :root {
+            --bg: #f2f4f8;
+            --panel: #fff;
+            --accent: #0073e6;
+            --text: #333;
+            --radius: 6px;
+            --input-height: 44px;
+        }
+        body { background: var(--bg); color: var(--text); }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 60px);
+            margin: 0 20px;
+        }
+        .login-panel {
+            background: var(--panel);
+            max-width: 380px;
+            width: 100%;
+            padding: 2em;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+        }
+        .login-panel h1 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2em;
+            text-align: center;
+            color: var(--accent);
+        }
+        .login-panel label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .login-panel input[type="text"],
+        .login-panel input[type="password"] {
+            width: 100%;
+            height: var(--input-height);
+            padding: 0 0.8em;
+            margin-bottom: 1em;
+            border: 1px solid #bbb;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+        }
+        .login-panel input:invalid {
+            border-color: #d0454c;
+        }
+        .login-panel button {
+            width: 100%;
+            height: var(--input-height);
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .login-panel button:hover {
+            opacity: 0.8;
+        }
+        .login-panel .error {
+            background: #ffe0e0;
+            color: #900;
+            padding: 0.6em;
+            border: 1px solid #d0454c;
+            border-radius: var(--radius);
+            margin-bottom: 1em;
+            font-size: 0.85rem;
+        }
+        .login-panel .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1em;
+            font-size: 0.9rem;
+        }
+        .login-panel .remember-me input {
+            margin-right: 0.5em;
+            width: auto;
+        }
+        @media (max-width: 500px) {
+            .login-container { min-height: auto; padding-top: 60px; }
+            .login-panel { padding: 1.5em; }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="login-container">
+    <div class="login-panel">
+        <h1>Connexion</h1>
+
+        {% if error %}
+            <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form action="{{ path('app_login') }}" method="post">
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+
+            <label for="username">Email ou identifiant</label>
+            <input type="text"
+                   id="username"
+                   name="_username"
+                   value="{{ last_username }}"
+                   required autofocus>
+
+            <label for="password">Mot de passe</label>
+            <input type="password"
+                   id="password"
+                   name="_password"
+                   required>
+
+            <div class="remember-me">
+                <input type="checkbox"
+                       id="remember_me"
+                       name="_remember_me">
+                <label for="remember_me">Se souvenir de moi</label>
+            </div>
+
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
