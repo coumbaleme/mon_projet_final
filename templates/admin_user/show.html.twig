@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AdminUserController{% endblock %}
+
+{% block body %}
+    <h1>AdminUserController</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('admin_user/_delete_form.html.twig') }}
+{% endblock %}

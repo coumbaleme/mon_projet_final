@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
+      
             $plainPassword = $form->get('plainPassword')->getData();
 
             // encode the plain password
@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
         ]);
     }
         #[Route('/logout', name: 'app_logout')]
-                  public function logout(): Response
+                  public function logout(): void
 {
     throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
 }

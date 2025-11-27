@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CategoryTraveaux{% endblock %}
+
+{% block body %}
+    <h1>Edit CategoryTraveaux</h1>
+
+    {{ include('category_traveaux/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_category_traveaux_index') }}">back to list</a>
+
+    {{ include('category_traveaux/_delete_form.html.twig') }}
+{% endblock %}

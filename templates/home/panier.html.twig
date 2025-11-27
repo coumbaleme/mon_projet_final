@@ -1,56 +1,50 @@
-{# templates/home/home.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil – [Votre BTP]{% endblock %}
-
-{% block stylesheets %}
-  {{ parent() }}
-  <style>
-    .hero {
-      background: url('/images/chantier-hero.jpg') center/cover no-repeat;
-      height: 60vh; display:flex;
-      align-items:center; justify-content:center;
-      color:#fff; text-align:center;
-    }
-    .hero h1 { font-size:3rem; margin:0; }
-    .hero a { background:#ff6600; padding:1rem 2rem; color:#fff; border-radius:4px; text-decoration:none; margin-top:1rem; display:inline-block; }
-
-    .gallery {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-      gap:1rem; padding:2rem; background:#f5f5f5;
-    }
-    .gallery img { width:100%; height:150px; object-fit:cover; border-radius:6px; transition: transform .3s; }
-    .gallery img:hover { transform: scale(1.05); }
-
-    .mission {
-      text-align:center; padding:2rem 1rem; background:#fff;
-    }
-    footer { background:#0a2e50; color:#fff; text-align:center; padding:2rem 1rem; }
-    footer a { color:#ff6600; text-decoration:none; font-weight:bold; }
-  </style>
-{% endblock %}
+{% block title %}Panier{% endblock %}
 
 {% block body %}
-  <section class="hero">
-    <div>
-      <h1>Construisons l’avenir, ensemble</h1>
-      <a href="#projects">Voir nos projets</a>
-    </div>
-  </section>
+<div class="container mt-4">
+    <h1>Votre panier</h1>
 
-  <section class="gallery" id="projects">
-    {% for projet in projets %}
-      <img src="{{ asset(projet.image) }}" alt="{{ projet.nom }}">
-    {% endfor %}
-  </section>
-
-  <section class="mission">
-    <h2>Notre mission</h2>
-    <p>Expertise, sécurité et durabilité au cœur de chaque chantier. Plus de 10 000 m² livrés avec passion.</p>
-  </section>
-
-  <footer>
-   
-  </footer>
+    {% if panier is empty %}
+        <p>Votre panier est vide.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Sous-total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in panier %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ (item.product.price / 100)|number_format(2, ',', ' ') }} €</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ (item.subtotal / 100)|number_format(2, ',', ' ') }} €</td>
+                        <td>
+                            {# Les liens pour ajouter/enlever/supprimer (à adapter avec tes routes) #}
+                            <a href="{{ path('panier_ajouter', {'product_id': loop.index0}) }}" class="btn btn-success">+</a>
+                            <a href="{{ path('panier_enlever', {'product_id': loop.index0}) }}" class="btn btn-warning">-</a>
+                            <a href="{{ path('panier_supprimer', {'product_id': loop.index0}) }}" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td>{{ (total / 100)|number_format(2, ',', ' ') }} €</td>
+                    <td>
+                        <a href="{{ path('panier_vider') }}" class="btn btn-danger">Vider</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    {% endif %}
+</div>
 {% endblock %}

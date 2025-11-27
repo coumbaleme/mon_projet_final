@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CategoryUser{% endblock %}
+
+{% block body %}
+    <h1>Create new CategoryUser</h1>
+
+    {{ include('category_user/_form.html.twig') }}
+
+    <a href="{{ path('app_category_user_index') }}">back to list</a>
+{% endblock %}

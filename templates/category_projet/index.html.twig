@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryProjet index{% endblock %}
+
+{% block body %}
+    <h1>CategoryProjet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <tr>
+                <th>Id</th>
+                <th>nom</th>
+                <th>description
+            </th>
+            <th>image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category_projet in category_projets %}
+            <tr>
+                <td>{{ category_projet.id }}</td>
+                <td>{{ category_projet.nom }}</td>
+
+                <td>{{ category_projet.description|slice(0,10) }} ...</td>
+                <td><img style="width: 30px; height: 30px;" src="{{ asset('images/product_image/' ~ category_projet.image) }}" alt=""></td>
+                <td>
+                    <a href="{{ path('app_category_projet_show', {'id': category_projet.id}) }}">show</a>
+                    <a href="{{ path('app_category_projet_edit', {'id': category_projet.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_category_projet_new') }}">Create new</a>
+{% endblock %}

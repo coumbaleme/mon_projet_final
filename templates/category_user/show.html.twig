@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryUser{% endblock %}
+
+{% block body %}
+    <h1>CategoryUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category_user.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_category_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_category_user_edit', {'id': category_user.id}) }}">edit</a>
+
+    {{ include('category_user/_delete_form.html.twig') }}
+{% endblock %}

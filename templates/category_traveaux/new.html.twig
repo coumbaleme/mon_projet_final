@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CategoryTraveaux{% endblock %}
+
+{% block stylesheets %}
+<style>
+    /* Layout */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+    }
+
+    h1 {
+        text-align: center;
+        color: #222;
+        margin-bottom: 30px;
+    }
+
+    .category-form {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 28px;
+        background: linear-gradient(145deg, #ffffff, #e6f0ff);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        transition: transform 0.25s ease;
+    }
+
+    .category-form:hover {
+        transform: translateY(-4px);
+    }
+
+    /* Fields */
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .category-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+    }
+
+    /* Generic inputs (text, email, number, select, textarea) */
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d0d7df;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+        transition: border .2s, box-shadow .2s;
+        background: #fff;
+    }
+
+    .form-control:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 6px rgba(74,144,226,0.18);
+    }
+
+    textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    /* Checkbox / radio */
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        accent-color: #4a90e2; /* modern browsers */
+    }
+
+    .form-check-label {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    /* Errors */
+    .form-error {
+        color: #b00020;
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    /* Submit / Back buttons */
+    .actions {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: #357abd;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: #357abd;
+        border: 1px solid #cfe3fb;
+    }
+
+    .link-back {
+        display: inline-block;
+        padding: 11px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        align-self: center;
+    }
+
+    /* Small responsive tweak */
+    @media (max-width: 480px) {
+        .category-form { padding: 20px; }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Create new CategoryTraveaux</h1>
+
+    <div class="category-form">
+        {{ include('category_traveaux/_form.html.twig') }}
+    </div>
+
+    <div style="text-align:center; margin-top:14px;">
+        <a class="link-back btn-secondary" href="{{ path('app_category_traveaux_index') }}">Back to list</a>
+    </div>
+{% endblock %}
+
+
+

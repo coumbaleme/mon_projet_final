@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryTraveaux index{% endblock %}
+
+{% block body %}
+    <h1>CategoryTraveaux index</h1>
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <tr>
+                <th>Id</th>
+                <th>nom</th>
+                <th>description
+            </th>
+           <th>images</th>
+                <th>actions</th>
+            </tr>
+        <tbody>
+        {% for category_traveaux in category_traveauxes %}
+           <tr>
+                <td>{{ category_traveaux.id }}</td>
+                <td>{{ category_traveaux.name }}</td>
+
+                <td>{{ category_traveaux.description|slice(0,10) }} ...</td>
+                <td><img style="width: 30px; height: 30px;" src="{{ asset('images/product_image/' ~ category_traveaux.image) }}" alt=""></td>
+                <td>
+                    <a href="{{ path('app_category_traveaux_show', {'id': category_traveaux.id}) }}">show</a>
+                    <a href="{{ path('app_category_traveaux_edit', {'id': category_traveaux.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+
+         </tbody>
+    </table>
+
+
+    <a href="{{ path('app_category_traveaux_new') }}">Create new</a>
+{% endblock %}

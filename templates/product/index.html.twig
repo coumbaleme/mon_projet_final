@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}list des Product {% endblock %}
+
+{% block body %}
+    <h1>List des Product</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+                  <th>stock</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for index in pror %}
+            <tr>
+                <td>{{ index.id }}</td>
+                <td>{{ index.titre }}</td>
+                <td>{{ index.prix }}</td>
+                <td>{{ index.description }}</td>
+                <td><img style="width: 30px; height: 30px;" src="{{ asset('images/product_image/' ~ index.image) }}" alt=""></td>
+                <td>
+                    <a href="{{ path('app_product_show', {'id': index.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': index.id}) }}">edit</a>
+                    <td>{{ index.stock }}</td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_new') }}">Create new</a>
+{% endblock %}

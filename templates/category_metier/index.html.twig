@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategoryMetier index
+{% endblock %}
+
+{% block body %}
+	<h1>CategoryMetier index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>nom</th>
+				<th>description
+				</th>
+				<th>images</th>
+
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category_metier in category_metiers %}
+				<tr>
+					<td>{{ category_metier.id }}</td>
+					<td>{{ category_metier.nom }}</td>
+					<td>{{ category_metier.description|slice(0,10) }}
+						...</td>
+
+					<td><img style="width: 30px; height: 30px;" src="{{ asset('images/metiers/' ~ category_metier.image) }}" alt=""></td>
+
+					<td>
+						<a href="{{ path('app_category_metier_show', {'id': category_metier.id}) }}">show</a>
+						<a href="{{ path('app_category_metier_edit', {'id': category_metier.id}) }}">edit</a>
+					</td>
+				</tr>
+
+			{% else %}
+				<tr>
+					<td colspan="2">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_category_metier_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,80 @@
+<div class="form-product">
+    {{ form_start(form) }}
+
+    <div>{{ form_row(form.prix) }}</div>
+    <div>{{ form_row(form.titre) }}</div>
+    <div>{{ form_row(form.description) }}</div>
+    <div>{{ form_row(form.stock) }}</div>
+    <div>{{ form_row(form.image) }}</div>
+    <div>{{ form_row(form.Traveaux) }}</div>
+    <div>{{ form_row(form.Metier) }}</div>
+    <div>{{ form_row(form.Projet) }}</div>
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    
+    {{ form_end(form) }}
+</div>
+
+<style>
+.form-product {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #f9f9fb;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.form-product div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-product label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.form-product input,
+.form-product textarea,
+.form-product select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-product input:focus,
+.form-product textarea:focus,
+.form-product select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-product .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.form-product .btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.form-product .btn:active {
+    transform: translateY(1px);
+}
+</style>

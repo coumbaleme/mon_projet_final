@@ -1,24 +1,93 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+    }
+
+    h1 {
+        text-align: center;
+        color: #222;
+        margin-bottom: 40px;
+    }
+
+    .register-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        background: linear-gradient(145deg, #ffffff, #e6f0ff);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .register-form:hover {
+        transform: translateY(-5px);
+    }
+
+    .register-form label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .register-form input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        font-size: 16px;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .register-form input:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+
+    .register-form button {
+        margin-top: 25px;
+        padding: 14px 25px;
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s;
+        width: 100%;
+    }
+
+    .register-form button:hover {
+        background-color: #357abd;
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<h1>Créer un compte</h1>
 
-    {{ form_errors(registrationForm) }}
-    
+<div class="register-form">
 
     {{ form_start(registrationForm) }}
+
         {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-         
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, { label: 'Mot de passe' }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit">S’inscrire</button>
 
-
-       
     {{ form_end(registrationForm) }}
+
+</div>
 {% endblock %}
