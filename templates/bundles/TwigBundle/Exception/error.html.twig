@@ -1,0 +1,13 @@
+{# templates/bundles/TwigBundle/error.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur {{ status_code }}{% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">{{ status_code }}</h1>
+    <h2 class="mb-4">{{ status_text }}</h2>
+    <p class="lead">Une erreur est survenue sur le serveur.</p>
+    <a href="{{ path('app_pepper_index') }}" class="btn btn-primary mt-3">Retour à l’accueil</a>
+</div>
+{% endblock %}

@@ -55,7 +55,9 @@ class CartController extends AbstractController
                 'quantity' => $qty,
                 'lineTotal' => $qty * $p->getPrix()
             ];
+         
             $total += $qty * $p->getPrix();
+         
         }
         return $this->render('cart/index.html.twig', compact('lines', 'total'));
     }

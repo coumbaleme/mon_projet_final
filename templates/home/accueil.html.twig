@@ -4,125 +4,19 @@
 
 {% block stylesheets %}
 <style>
-:root {
-  --primary: #003366;
-  --accent: #ff6600;
-  --text: #222;
-  --bg: #f7f7f7;
-}
-body {
-  margin: 0;
-  font-family: sans-serif;
-  color: var(--text);
-  line-height: 1.5;
-}
 
-/* HERO */
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f0f4f8;
-  padding: 3em;
-}
-.hero-text { flex: 1; }
-.hero-text h1 { font-size: 2.5rem; margin-bottom: 0.5em; }
-.hero-text p { font-size: 1.1rem; margin-bottom: 1.5em; }
-.hero-text a {
-  display: inline-block;
-  padding: 0.8em 2em;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 4px;
-  text-decoration: none;
-}
-.hero-img { flex: 1; }
-.hero-img img { width: 100%; border-radius: 8px; }
-
-/* PRODUITS */
-#produits {
-  padding: 3rem 1rem;
-  background: #87aff5ff;
-}
-
-
-#produits h2 {
-  color: white;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-/* STATS */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  background: #fff;
-  padding: 3rem 1rem;
-  text-align: center;
-}
-.stats {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-/* SERVICES */
-#services {
-  padding: 80px 20px;
-  background: #fdfdfd;
-  text-align: center;
-}
-#services .intro {
-  max-width: 800px;
-  margin: 0 auto 2.5rem;
-  font-size: 1.1rem;
-  color: #555;
-}
-.services-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-.service-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-.service-card img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-}
-.service-card h3 { color: var(--accent); margin-bottom: 0.5rem; }
-.service-card p { font-size: 0.95rem; color: #444; }
-
-/* FOOTER */
-footer {
-  background: var(--primary);
-  color: #fff;
-  padding: 2rem 1rem;
-  text-align: center;
-}
-footer a.btn {
-  background: var(--accent);
-  color: #fff;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 6px;
-}
 </style>
 {% endblock %}
 
 {% block body %}
+{% if app.user %}
+    <div style="text-align:right; padding:10px;">
+        <a href="{{ path('app_logout') }}" class="btn btn-danger">
+            Se déconnecter
+        </a>
+    </div>
+{% endif %}
+
 <section class="hero">
   <div class="hero-text">
     <h1>Nous sommes parmi les meilleures entreprises de construction</h1>

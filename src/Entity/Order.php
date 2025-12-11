@@ -14,7 +14,7 @@ class Order
 #[ORM\Column(type: 'integer')]
 private ?int $id = null;
 // Email saisi dans le form
-#[ORM\Column(type: 'string', length: 180)]
+#[ORM\Column(type: 'string', length: 180, nullable: true)]
 private ?string $email = null;
 // Adresse de livraison saisie dans le form (optionnelle)
 #[ORM\Column(type: 'text', nullable: true)]
@@ -30,6 +30,9 @@ private \DateTimeImmutable $createdAt;
 // Lignes de commande
 #[ORM\OneToMany(mappedBy: 'order', targetEntity: OrderItem::class, cascade: ['persist'], orphanRemoval: true)]
 private Collection $items;
+
+#[ORM\ManyToOne(inversedBy: 'commande')]
+private ?User $user = null;
 public function __construct()
 {
 $this->createdAt = new \DateTimeImmutable();
@@ -75,5 +78,17 @@ $sum += $i->getSubtotal();
 }
 $this->total = $sum;
 return $this;
+}
+
+public function getUser(): ?User
+{
+    return $this->user;
+}
+
+public function setUser(?User $user): static
+{
+    $this->user = $user;
+
+    return $this;
 }
 }

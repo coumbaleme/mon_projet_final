@@ -23,7 +23,9 @@ EntityManagerInterface $em,   // pour persister Order/OrderItem
 
 ) {
 // 1) Construire le récap panier depuis la session
-$lines = []; $total = 0;
+$lines = [];
+ $total = 0;
+ 
 foreach ($cart->all() as $id => $qty) {
        $p = $repo->find($id); 
 
@@ -32,6 +34,7 @@ $lines[] = ['p' => $p, 'qty' => $qty, 'unit' => $p->getPrix()];
 $total += $qty * $p->getPrix();
 
 }
+
 // 2) Si panier vide, on redirige vers la page panier
 if ($total <= 0) {
 $this->addFlash('warning', 'Votre panier est vide.');
@@ -39,10 +42,10 @@ return $this->redirectToRoute('cart_show');
 }
 // 3) Créer un Order et lier le formulaire OrderType dessus
 $order = new Order();
-$form = $this->createForm(OrderType::class, $order); // 👈 form LIÉ à l'entité
-$form->handleRequest($request);
+
+
 // 4) À la soumission valide :
-if ($form->isSubmitted() && $form->isValid()) {
+
 // Fixer les champs techniques côté serveur (sécurité)
 $order
 ->setStatus('paid')           // simulation : paiement OK
@@ -64,11 +67,10 @@ $em->persist($order);
 $em->flush();
 $cart->clear();
 $this->addFlash('success', 'Commande créée, merci !');
-return $this->redirectToRoute('app_accueil'); // ou page "merci"
-}
+
 // 7) Afficher la page checkout avec le récap + form
-return $this->render('checkout/index.html.twig', [
-'form'  => $form->createView(),
+return $this->render('home/profile.html.twig', [
+
 'lines' => $lines,
 'total' => $total
 ]);

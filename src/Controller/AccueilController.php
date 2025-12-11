@@ -69,5 +69,21 @@ final class AccueilController extends AbstractController
         return $this->render('home/home.html.twig', [
             'cards' => $cards,
         ]);
+
+        
     }
+
+
+    #[Route('/Apropos', name: 'app_apropos')]
+    public function apropos(): Response
+    {
+     
+
+        return $this->render('home/apropos.html.twig', [
+          
+        ]);
+    }
+
+
+
 }

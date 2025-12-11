@@ -1,0 +1,26 @@
+{# templates/bundles/TwigBundle/error500.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur serveur (500){% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">500</h1>
+    <h2 class="mb-4">Erreur interne du serveur</h2>
+    <p class="lead">Une erreur est survenue. Veuillez réessayer plus tard.</p>
+    <a href="{{ path('app_pepper_index') }}" class="btn btn-primary mt-3">Retour à l’accueil</a>
+    
+PS C:\Users\Moussa\mon_projet_final>
+                                     php bin/console cache:clear --env=prod
+
+ // Clearing the cache for the prod environment with debug false
+mance.","code":0,"file":"C:\\Users\\Moussa\\mon_projet_final\\vendor\\symfony\\framework-bundle\\DependencyInjection\\FrameworkExtension.php:347"}},"level":200,"level_name":"INFO","channel":"deprecation","datetime":"2025-12-05T14:16:30.206598+01:00","extra":{}}
+{"message":"User Deprecated: Version detection logic for MySQL will change in DBAL 4. Please specify the version as the server reports it, e.g. \"10.9.3-MariaDB\" instead of \"mariadb-10.9\". (AbstractMySQLDriver.php:176 called by AbstractMySQLDriver.php:45, https://github.com/doctrine/dbal/pull/5779, package doctrine/orm)","context":{"exception":{"class":"ErrorException","message":"User Deprecated: Version 
+detection logic for MySQL will change in DBAL 4. Please specify the version as the server reports it, e.g. \"10.9.3-MariaDB\" instead of 
+\"mariadb-10.9\". (AbstractMySQLDriver.php:176 called by AbstractMySQLDriver.php:45, https://github.com/doctrine/dbal/pull/5779, package 
+doctrine/orm)","code":0,"file":"C:\\Users\\Moussa\\mon_projet_final\\vendor\\doctrine\\deprecations\\src\\Deprecation.php:208"}},"level":200,"level_name":"INFO","channel":"deprecation","datetime":"2025-12-05T14:16:35.053298+01:00","extra":{}}
+
+ [OK] Cache for the "prod" environment (debug=false) was successfully cleared.
+
+</div>
+{% endblock %}

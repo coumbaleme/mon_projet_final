@@ -1,0 +1,255 @@
+
+{% extends "base.html.twig" %}
+{% block body %}
+<html lang="fr">
+<head>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+  <title>À propos – Mon Entreprise BTP_Consulting</title>
+  <style>
+    /* ==================== VARIABLES COULEURS, TYPO GRANDS PRINCIPES ==================== */
+    :root {
+      --bleu‑Marine: #0a2e50;
+      --orange‑CTA: #ff6600;
+      --gris‑texte: #333;
+      --bg‑clair: #f5f5f5;
+      --border‑clair: #ddd;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--gris‑texte);
+      background: #3c85caff;
+    }
+
+    h1, h2, h3, h4 { color: var(--bleu‑Marine); font-weight: normal; }
+
+    a { color: var(--orange‑CTA); text-decoration: none; }
+    .btn‑cta {
+      background: var(--orange‑CTA);
+      color: #fff;
+      padding: .75em 1.5em;
+      border-radius: 4px;
+      display: inline-block;
+      transition: opacity .3s;
+    }
+    .btn‑cta:hover { opacity: .8; }
+
+    section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      background: url('hero‑chantier.jpg') center/cover no-repeat;
+      height: 65vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero h1 { font-size: 2.8rem; }
+    .hero h2 {
+      font-size: 1.5rem;
+      margin-top: .8rem;
+      font-weight: normal;
+    }
+
+    /* ==================== À PROPOS ==================== */
+    #about p {
+      max-width: 800px;
+      margin: 1em auto;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    #about img {
+      display: block;
+      margin: 2em auto;
+      width: 300px;
+      max-width: 90%;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* ==================== ÉQUIPE / TEAM – grille responsive ==================== */
+    #team .team‑grid {
+      display: grid;
+      gap: 2rem;
+      /* responsive sans media query : auto‑fit + minmax via CSS Grid */
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    #team .membre {
+      background: #fff;
+      border: 1px solid var(--border‑clair);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    #team img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    #team h3 { margin-bottom: .3rem; }
+    #team .poste { color: #666; margin-bottom: 1rem; font-size: .95rem; }
+
+    /* ==================== STATISTIQUES CLÉS ==================== */
+    #stats .stats‑wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    #stats .stat {
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid var(--border‑clair);
+      padding: 1em 1.2em;
+      width: 180px;
+      text-align: center;
+    }
+    #stats .stat strong {
+      font-size: 1.8rem;
+      color: var(--orange‑CTA);
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    /* ==================== PROJETS / GALERIE ==================== */
+    #projects .proj‑grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    #projects .proj‑card {
+      background: #fff;
+      border: 1px solid var(--border‑clair);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    #projects img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    #projects h4 { font-size: 1.1rem; padding: .75rem .85rem .3rem; }
+    #projects p {
+      font-size: .95rem;
+      padding: 0 .85em .85em;
+      color: #555;
+    }
+    #projects .testimonial {
+      font-size: .9rem;
+      padding: 0 .85em .85em;
+      font-style: italic;
+      color: #666;
+    }
+
+    /* ==================== CTA FOOTER ==================== */
+    #cta section {
+      text-align: center;
+      background: var(--bleu‑Marine);
+      color: #fff;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+    #cta .btn‑cta { background: #ff922b; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>BTP_Consulting S.A</h1>
+    <h2>Engagement • Qualité • Sécurité</h2>
+    <a href="mailto:contact@btp-consulting.com?subject=Demande de devis" "#contact" class="btn‑cta" style="margin-top: 1.3rem;">Demander un devis</a>
+    
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="about">
+    <h2>Qui sommes‑nous ?</h2>
+    <p>
+      Fondée en 2025, BTP_Consulting développe des ouvrages durables avec rigueur et innovation.  
+      Nous sommes engagés dans une démarche QSE, sécurité & responsabilité environnementale sur chaque chantier.
+    </p>
+    <img src="https://www.skillandyou.com/_next/image?url=https%3A%2F%2Famazing-book-4391c66fab.media.strapiapp.com%2Ftp_conducteur_travaux_skill_and_you_a99cc701b8.jpg&w=3840&q=75" alt="Photo fondateurs / équipe en action">
+  </section>
+
+  <!-- ÉQUIPE -->
+  <section id="team">
+    <h2>Notre équipe</h2>
+    <div class="team‑grid">
+      <div class="membre">
+        <img src="https://media.licdn.com/dms/image/v2/D4E03AQGTxAq-KYSQow/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1680572266389?e=2147483647&v=beta&t=P0VMk0P-vP3_B4xNPyNnObiOFMJ1ozMm6QA3uCoKo4o" alt="Portrait Eva Dupont">
+        <h3>Eva_BA</h3>
+        <p class="poste">Directrice de projets</p>
+        <p>Responsable de la conduite complète des chantiers publics depuis 2025.</p>
+      </div>
+      <div class="membre">
+        <img src="https://media.licdn.com/dms/image/v2/C4E03AQG5Zhpsh7BjBw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1658786372695?e=2147483647&v=beta&t=IYZbV8dtRuhK36nRJnfeN_XrDRwnph710MgQ4rXbNiU" alt="Portrait Mohamed Lamine">
+        <h3>Moussa SANE</h3>
+        <p class="poste">Chef d’équipe</p>
+        <p>Coordonne les équipes terrain et assure le pilotage des travaux.</p>
+      </div>
+      <!-- autres profils... -->
+    </div>
+  </section>
+
+  <!-- STATISTIQUES -->
+  <section id="stats">
+    <h2>Nos chiffres clés</h2>
+    <div class="stats‑wrap">
+      <div class="stat">
+        <strong>15</strong><span>ans d’expérience</span>
+      </div>
+      <div class="stat">
+        <strong>120 000 m²</strong><span>livrés</span>
+      </div>
+      <div class="stat">
+        <strong>ISO 9001</strong><span>certifié</span>
+      </div>
+      <div class="stat">
+        <strong>Carte BTP</strong><span>à jour</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projects">
+    <h2>Études de cas & Projets marquants</h2>
+    <div class="proj‑grid">
+      <div class="proj‑card">
+        <img src="https://mesinfos.fr/content/articles/659/A216659/initial-nouvelle-station-decines-roosevelt-c-dorian-molinier.jpg" alt="Avant projet Gare T3">
+        <h4>Gare T3 – Paris</h4>
+        <p>Réaménagement complet du site avec respect des délais.</p>
+        <p class="testimonial">« Très professionnels, respect des engagements malgré la complexité. »</p>
+      </div>
+      <div class="proj‑card">
+        <img src="https://www.shutterstock.com/image-photo/foreman-talking-by-walkie-talkie-600nw-1719915823.jpg" alt="Logements Île‑de‑France après livraison">
+        <h4>60 logements – Île‑de‑France</h4>
+        <p>Projet basse consommation en zone péri-urbaine respectueux de l’environnement.</p>
+        <p class="testimonial">« Qualité & ponctualité au rendez-vous. »</p>
+      </div>
+      <!-- autres projets... -->
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta">
+    <h2>Prêt à bâtir avec nous ?</h2>
+    <p>Faisons le point : étude rapide de votre projet, réponse sous 48 h, démarrage des travaux dans les meilleurs délais.</p>
+    
+     <a href="{{path('app_contact')}}" class="btn‑cta">Nous contacter</a>
+  </section>
+
+</body>
+</html>
+
+{% endblock %}

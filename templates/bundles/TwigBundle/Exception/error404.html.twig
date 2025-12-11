@@ -1,0 +1,14 @@
+{# templates/bundles/TwigBundle/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable (404){% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">404</h1>
+    <h2 class="mb-4">Oups ! Page non trouvée</h2>
+    xcvxxxcfhdcdrtsetsettse
+    <p class="lead">La page que vous recherchez n’existe pas ou a été déplacée.</p>
+    <a href="{{ path('app_pepper_index') }}" class="btn btn-primary mt-3">Retour à l’accueil</a>
+</div>
+{% endblock %}

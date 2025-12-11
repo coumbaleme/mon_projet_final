@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('categorytraveaux')]
+#[Route('/categorytraveaux')]
 final class CategoryTraveauxController extends AbstractController
 {
     #[Route(name: 'app_category_traveaux_index', methods: ['GET'])]
