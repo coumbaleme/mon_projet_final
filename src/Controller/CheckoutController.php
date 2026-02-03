@@ -42,10 +42,11 @@ return $this->redirectToRoute('cart_show');
 }
 // 3) Créer un Order et lier le formulaire OrderType dessus
 $order = new Order();
-
-
+$order->setUser($this->getUser()); // utilisateur courant
+$form = $this->createForm(OrderType::class, $order); // 👈 form LIÉ à l'entité
+$form->handleRequest($request);
 // 4) À la soumission valide :
-
+if ($form->isSubmitted() && $form->isValid()) {
 // Fixer les champs techniques côté serveur (sécurité)
 $order
 ->setStatus('paid')           // simulation : paiement OK
@@ -67,10 +68,11 @@ $em->persist($order);
 $em->flush();
 $cart->clear();
 $this->addFlash('success', 'Commande créée, merci !');
-
+return $this->redirectToRoute('app_accueil'); // ou page "merci"
+}
 // 7) Afficher la page checkout avec le récap + form
-return $this->render('home/profile.html.twig', [
-
+return $this->render('checkout/index.html.twig', [
+'form'  => $form->createView(),
 'lines' => $lines,
 'total' => $total
 ]);

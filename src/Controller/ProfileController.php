@@ -10,17 +10,23 @@ use App\Repository\OrderRepository;
 final class ProfileController extends AbstractController
 
 
+{#[Route('/Profile', name: 'app_profile')]
+public function index(OrderRepository $orderRepository): Response
 {
-    #[Route('/Profile', name: 'app_profile')]
-    public function index(OrderRepository $order): Response
-    {
-        dd( $this->getUser());
-        
-     $commandes = $order->findBy(['user' => $this->getUser()]);
-        return $this->render('home/profile.html.twig', [
-            'commandes' => $commandes,
-        ]);
+    $user = $this->getUser();
+
+    if (!$user) {
+        throw $this->createAccessDeniedException("Vous devez être connecté.");
     }
+
+    // Récupérer les commandes du user
+    $commandes = $orderRepository->findBy(['user' => $user]);
+
+    return $this->render('home/profile.html.twig', [
+        'commandes' => $commandes,
+    ]);
+}
+
 
 
 }

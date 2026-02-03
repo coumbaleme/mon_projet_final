@@ -10,6 +10,9 @@
 
     <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     
     {% block stylesheets %}{% endblock %}
@@ -59,41 +62,140 @@
     </nav>
 
     {# Barre Admin visible seulement pour les administrateurs #}
-    {% if is_granted('ROLE_ADMIN') %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_admin_user_index') }}">Admin Panel</a>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages Admin</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a></li>
-                             <li><a class="dropdown-item" href="{{ path('product_index')|default('#') }}">Produits</a></li>
-                            <li><a class="dropdown-item" href="{{ path('app_category_traveaux_index')|default('#') }}">Travaux</a></li>
-                            <li><a class="dropdown-item" href="{{ path('app_category_metier_index')|default('#') }}">Métiers</a></li>
-                            <li><a class="dropdown-item" href="{{ path('app_category_projet_index')|default('#') }}">Projets</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('app_logout') }}" class="btn btn-warning">Se déconnecter</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    {% endif %}
+   {% if is_granted('ROLE_ADMIN') %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <!-- Logo / Brand -->
+        <a class="navbar-brand fw-bold" href="{{ path('app_admin_user_index') }}">
+            Admin Panel
+        </a>
+
+        <!-- Toggle pour mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <!-- Dropdown Pages Admin -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesAdminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pages Admin
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pagesAdminDropdown">
+                        <li><a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a></li>
+                        <li><a class="dropdown-item" href="{{ path('product_index')|default('#') }}">Produits</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_category_traveaux_index')|default('#') }}">Travaux</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_category_metier_index')|default('#') }}">Métiers</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_category_projet_index')|default('#') }}">Projets</a></li>
+                    </ul>
+                </li>
+
+                <!-- Bouton déconnexion -->
+                <li class="nav-item ms-lg-3">
+                    <a href="{{ path('app_logout') }}" class="btn btn-warning fw-bold text-dark">
+                        Se déconnecter
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endif %}
+
 </header>
 
 <main class="container mt-4">
     {% block body %}{% endblock %}
 </main>
 
-<footer class="bg-dark text-light mt-5 py-4">
-    <div class="container text-center">
-        <p>&copy; 2025 BTP_Consulting — Tous droits réservés</p>
+<footer class="bg-dark text-light mt-5 py-5">
+    <div class="container">
+
+        <div class="row text-center text-md-start">
+
+            <!-- COL 1 : Logo / identité -->
+            <div class="col-md-4 mb-4">
+                <h5 class="text-uppercase fw-bold">BTP Consulting</h5>
+                <p class="small mb-2">
+                    Expertise & accompagnement dans le secteur du BTP.<br>
+                    Professionnalisme, fiabilité et conformité.
+                </p>
+                <p class="small mb-0">
+                    <i class="bi bi-envelope"></i>
+                    <a href="mailto:contact@monsite.com" class="text-light text-decoration-none">
+                        contact@monsite.com
+                    </a>
+                </p>
+            </div>
+
+            <!-- COL 2 : Liens légaux -->
+            <div class="col-md-4 mb-4">
+                <h5 class="text-uppercase fw-bold">Informations</h5>
+                <ul class="list-unstyled small">
+                    <li class="mb-1">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <a href="{{ path('mention_legal') }}" class="text-light text-decoration-none ms-1">
+                            Mentions légales
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <i class="bi bi-shield-lock"></i>
+                        <a href="{{ path('politique_confidentialite') }}" class="text-light text-decoration-none ms-1">
+                            Politique de confidentialité
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <i class="bi bi-person-check"></i>
+                        <a href="{{ path('rgpd') }}" class="text-light text-decoration-none ms-1">
+                            RGPD
+                        </a>
+                    </li>
+                    <li>
+                        <i class="bi bi-chat-dots"></i>
+                        <a href="{{ path('app_contact') }}" class="text-light text-decoration-none ms-1">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- COL 3 : Réseaux sociaux -->
+            <div class="col-md-4 mb-4">
+                <h5 class="text-uppercase fw-bold">Suivez-nous</h5>
+                <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+                    <a href="https://www.facebook.com/kalamou.kara.509" class="text-light" aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/moussa-sane" class="text-light" aria-label="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                        </a>
+                    <a href="https://www.instagram.com/karakalamou/" class="text-light" aria-label="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    
+                    </a>
+                    <a href="https://github.com/coumbaleme?tab=repositories" class="text-light" aria-label="Github">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="border-secondary">
+
+        <!-- Bas footer -->
+        <div class="text-center small">
+            <p class="mb-1">
+                © {{ "now"|date("Y") }} <strong>BTP Consulting</strong> — Tous droits réservés
+            </p>
+            <p class="mb-0">
+                Conformément au RGPD, vos données personnelles sont protégées.
+            </p>
+        </div>
+
     </div>
 </footer>
-
-<script src="{{ asset('assets/js/cookie.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

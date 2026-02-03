@@ -1,22 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Mon Profil{% endblock %}
 
 {% block body %}
+<div class="container mt-4">
 
-{{app.user.email}}
+    <h1 class="mb-3">Profil utilisateur</h1>
 
-<p>bonjour  {{app.user.username}}</p>
+    <div class="card p-3 mb-4">
+        <p><strong>Email :</strong> {{ app.user.email }}</p>
+        <p><strong>Nom d'utilisateur :</strong> {{ app.user.username }}</p>
+    </div>
 
-<H2>Mes Commandes</H2>
-{% if commandes is not empty %}
+    <h2 class="mt-4">Mes Commandes</h2>
 
-{% for item in commandes %}
+    {% if commandes is not empty %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Paiement</th>
+                    <th>Confirmation</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in commandes %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.createdAt ? item.createdAt|date('d/m/Y H:i') : '' }}</td>
+                    <td>{{ (item.total / 100) | number_format(2, ',', ' ') }} €</td>
 
-    {{ item }}
-{% endfor %}
-{% endif %}
+                    <!-- Paiement -->
+                   <td>
+    {% if item.status == 'paid' %}
+        <span class="badge bg-success">Payée</span>
+    {% elseif item.status == 'pending' %}
+        <span class="badge bg-warning text-dark">En attente</span>
+    {% elseif item.status == 'canceled' %}
+        <span class="badge bg-danger">Annulée</span>
+    {% else %}
+        <span class="badge bg-secondary">{{ item.status }}</span>
+    {% endif %}
+</td>
+<td>
+    {% if item.status == 'confirmed' %}
+        <span class="badge bg-primary">Confirmée</span>
+    {% elseif item.status == 'paid' %}
+        <span class="badge bg-info text-dark">Payée</span>
+    {% else %}
+        <span class="badge bg-warning text-dark">Non confirmée</span>
+    {% endif %}
+</td>
 
-
-
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune commande pour le moment.</p>
+    {% endif %}
+</div>
 {% endblock %}

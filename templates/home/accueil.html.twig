@@ -9,13 +9,6 @@
 {% endblock %}
 
 {% block body %}
-{% if app.user %}
-    <div style="text-align:right; padding:10px;">
-        <a href="{{ path('app_logout') }}" class="btn btn-danger">
-            Se déconnecter
-        </a>
-    </div>
-{% endif %}
 
 <section class="hero">
   <div class="hero-text">
@@ -128,4 +121,55 @@
     </div>
   </div>
 </section>
+ {# Bandeau cookies #}
+         
+                <section id="cookieBanner" class="cookie-banner hide">
+                    <p>Ce site utilise des cookies pour améliorer votre expérience.</p>
+                    <button id="acceptCookies" class="btn btn-success">Accepter</button>
+                    <button id="refuseCookies" class="btn btn-danger">Refuser</button>
+                </section>
+         
+
+     <style>
+     .hide {
+    display: none;
+  }
+     </style> 
+  <script>
+   
+ 
+ 
+  // -------------------------------
+  // Bandeau cookies
+  // -------------------------------
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('acceptCookies');
+  const refuseBtn = document.getElementById('refuseCookies');
+ 
+  // Vérifie si un choix existe déjà
+  const choice = localStorage.getItem('cookiesChoice');
+ 
+  if (!choice) {
+    // Aucun choix → affiche le bandeau
+    banner.classList.remove('hide');
+  } else {
+    // Un choix existe → cache le bandeau
+    banner.classList.add('hide');
+    console.log('Choix des cookies déjà enregistré :', choice);
+  }
+ 
+  // Quand l’utilisateur clique sur "Accepter"
+  acceptBtn.onclick = function() {
+    localStorage.setItem('cookiesChoice', 'accepted');
+    banner.classList.add('hide');
+    console.log('Cookies acceptés.');
+  };
+ 
+  // Quand l’utilisateur clique sur "Refuser"
+  refuseBtn.onclick = function() {
+    localStorage.setItem('cookiesChoice', 'refused');
+    banner.classList.add('hide');
+    console.log('Cookies refusés.');
+  };
+  </script>
 {% endblock %}

@@ -19,6 +19,9 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $traveaux = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Order $string = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Image
     public function setTraveaux(string $traveaux): static
     {
         $this->traveaux = $traveaux;
+
+        return $this;
+    }
+
+    public function getString(): ?Order
+    {
+        return $this->string;
+    }
+
+    public function setString(?Order $string): static
+    {
+        $this->string = $string;
 
         return $this;
     }

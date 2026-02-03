@@ -33,10 +33,17 @@ private Collection $items;
 
 #[ORM\ManyToOne(inversedBy: 'commande')]
 private ?User $user = null;
+
+/**
+ * @var Collection<int, Image>
+ */
+#[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'string')]
+private Collection $images;
 public function __construct()
 {
 $this->createdAt = new \DateTimeImmutable();
 $this->items = new ArrayCollection();
+$this->images = new ArrayCollection();
 }
 // --- Getters / Setters ---
 public function getId(): ?int { return $this->id; }
@@ -88,6 +95,36 @@ public function getUser(): ?User
 public function setUser(?User $user): static
 {
     $this->user = $user;
+
+    return $this;
+}
+
+/**
+ * @return Collection<int, Image>
+ */
+public function getImages(): Collection
+{
+    return $this->images;
+}
+
+public function addImage(Image $image): static
+{
+    if (!$this->images->contains($image)) {
+        $this->images->add($image);
+        $image->setString($this);
+    }
+
+    return $this;
+}
+
+public function removeImage(Image $image): static
+{
+    if ($this->images->removeElement($image)) {
+        // set the owning side to null (unless already changed)
+        if ($image->getString() === $this) {
+            $image->setString(null);
+        }
+    }
 
     return $this;
 }

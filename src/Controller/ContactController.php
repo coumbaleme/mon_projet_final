@@ -2,43 +2,59 @@
 
 namespace App\Controller;
 
-use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-final class ContactController extends AbstractController
+class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, MailerInterface $mailer): Response
-
-   
     {
-        $form = $this->createForm(ContactType::class);
+        // Création du formulaire Symfony
+        $form = $this->createFormBuilder()
+            ->add('nom', TextType::class, ['label' => 'Nom'])
+            ->add('email', EmailType::class, ['label' => 'Email'])
+            ->add('message', TextareaType::class, ['label' => 'Message'])
+            ->add('envoyer', SubmitType::class, ['label' => 'Envoyer', 'attr' => ['class' => 'btn btn-primary mt-3']])
+            ->getForm();
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()&& $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            
+            
+           
 
-        $data = $form->getData();
+            $emailMessage = (new Email())
+                ->from('moussasanne02@gmail.com')
+                
+                ->to('moussasanne02@gmail.com') // remplace par ton email
+                ->replyTo($data['email'])
+                ->subject('Message depuis le formulaire de contact')
+                ->text(
+                    "Nom: {$data['nom']}\n".
+                    "Email: {$data['email']}\n".
+                    "Message:\n{$data['message']}"
+                );
 
-        $address =$data['email'];
-        $content = $data['content'];
+            $mailer->send($emailMessage);
 
-        $email =(new Email())
-            ->from($address)
-            ->to('aadmin@admin.com')
-            ->subject('demande de contact')
-            ->text($content);
-        $mailer->send($email);   
+            $this->addFlash('success', 'Votre message a été envoyé !');
+            return $this->redirectToRoute('app_contact');
+        }
 
-}
         return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
-            'formulaire' => $form
+            'form' => $form->createView(),
+            
         ]);
     }
 }
