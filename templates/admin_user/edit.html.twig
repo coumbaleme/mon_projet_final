@@ -1,13 +1,202 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit AdminUserController{% endblock %}
+{% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Edit AdminUserController</h1>
+<div class="container-fluid admin-container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="page-title">Edit User</h1>
+        </div>
+    </div>
 
-    {{ include('admin_user/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-custom">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">User Information</h5>
+                </div>
+                <div class="card-body p-4">
+                    {{ form_start(form) }}
+                    
+                    {# Rendu automatique de tous les champs du formulaire #}
+                    {{ form_widget(form) }}
 
-    <a href="{{ path('app_admin_user_index') }}">Retour à la liste</a>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <button type="submit" class="btn btn-custom-primary">
+                            <i class="bi bi-check-circle me-2"></i>Update
+                        </button>
+                        
+                        <div>
+                            {{ include('admin_user/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                    
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
-    {{ include('admin_user/_delete_form.html.twig') }}
+            <div class="text-center mt-3">
+                <a href="{{ path('app_admin_user_index') }}" class="btn-back">
+                    ← Back to list
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .admin-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-bottom: none;
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+
+    .card-body label {
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 0.95rem;
+    }
+
+    .card-body input[type="text"],
+    .card-body input[type="email"],
+    .card-body input[type="password"],
+    .card-body input[type="file"],
+    .card-body textarea,
+    .card-body select {
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        width: 100%;
+        margin-bottom: 1.25rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .card-body input:focus,
+    .card-body textarea:focus,
+    .card-body select:focus {
+        border-color: #667eea;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        background-color: #f8f9ff;
+    }
+
+    .btn-custom-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-custom-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-custom-primary:active {
+        transform: translateY(0);
+    }
+
+    .btn-outline-danger {
+        color: #e53e3e;
+        border: 2px solid #e53e3e;
+        background-color: transparent;
+        padding: 0.5rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #e53e3e;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(229, 62, 62, 0.3);
+    }
+
+    .btn-back {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-back:hover {
+        color: #e2e8f0;
+        transform: translateX(-5px);
+    }
+
+    .shadow-custom {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Style pour les messages d'erreur */
+    .invalid-feedback {
+        color: #e53e3e;
+        font-size: 0.875rem;
+        margin-top: -0.75rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    /* Style pour le file input */
+    input[type="file"] {
+        padding: 0.5rem !important;
+    }
+
+    /* Animation au chargement */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card {
+        animation: fadeIn 0.5s ease;
+    }
+</style>
 {% endblock %}

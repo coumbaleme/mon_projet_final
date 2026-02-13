@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.titre }}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .product-container {
+        max-width: 1000px;
+        margin: 60px auto;
+        padding: 30px;
+    }
+
+    .product-card {
+        display: flex;
+        gap: 40px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 30px;
+    }
+
+    .product-image img {
+        width: 350px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    .product-info h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .price {
+        font-size: 26px;
+        color: #2ecc71;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .stock {
+        font-weight: bold;
+        margin-bottom: 25px;
+        color: {{ product.stock > 0 ? '#3498db' : '#e74c3c' }};
+    }
+
+    .actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-primary {
+        background: #3498db;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #2980b9;
+    }
+
+    .btn-secondary {
+        background: #ecf0f1;
+        color: #2c3e50;
+    }
+
+    .btn-secondary:hover {
+        background: #dcdde1;
+    }
+
+    @media (max-width: 768px) {
+        .product-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .product-image img {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="product-container">
+    <div class="product-card">
+        <div class="product-image">
+            <img src="{{ asset('images/product_image/' ~ product.image) }}" alt="{{ product.titre }}">
+        </div>
+
+        <div class="product-info">
+            <h1>{{ product.titre }}</h1>
+
+            <div class="price">{{ product.prix }} €</div>
+
+            <div class="description">
+                {{ product.description }}
+            </div>
+
+            <div class="stock">
+                {% if product.stock > 0 %}
+                    En stock ({{ product.stock }} disponibles)
+                {% else %}
+                    Rupture de stock
+                {% endif %}
+            </div>
+
+            <div class="actions">
+                <a href="{{ path('app_accueil') }}" class="btn btn-secondary">← Retour</a>
+                {% if product.stock > 0 %}
+                  <form action="{{ path('cart_add', { id: product.id }) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token('add_to_cart_' ~ product.id) }}">
+
+									<div class="quantity-section">
+										<label for="qty_{{ product.id }}">Qté:</label>
+										<input id="qty_{{ product.id }}" type="number" name="quantity" max="{{ product.stock }}" min="1" value="1" class="quantity-input">
+									</div>
+
+									<button type="submit" class="btn-add-cart">
+										<span>🛒</span> Ajouter au panier
+									</button>
+								</form>
+                {% endif %}
+                	
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

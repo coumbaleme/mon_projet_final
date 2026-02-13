@@ -2,34 +2,117 @@
 
 {% block title %}Contact{% endblock %}
 
+{% block stylesheets %}
+<style>
+    .contact-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 30px;
+    }
+
+    .contact-container h1 {
+        margin-bottom: 25px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    textarea {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .form-error {
+        color: #e74c3c;
+        font-size: 13px;
+    }
+
+    .btn-submit {
+        align-self: flex-start;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background: #3498db;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+        background: #2980b9;
+    }
+
+    .flash-success {
+        margin-bottom: 20px;
+        padding: 12px;
+        background: #eafaf1;
+        border: 1px solid #2ecc71;
+        color: #2ecc71;
+        border-radius: 6px;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
-<div class="container mt-5">
+<div class="contact-container">
     <h1>Contactez-nous</h1>
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
+        <div class="flash-success">
+            {{ message }}
+        </div>
     {% endfor %}
 
-    {{ form_start(form) }}
-        <div class="mb-3">
+    {{ form_start(form, { attr: { class: 'contact-form' } }) }}
+
+        <div class="form-group">
             {{ form_label(form.nom) }}
-            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.nom) }}
+            {{ form_widget(form.nom) }}
+            <div class="form-error">
+                {{ form_errors(form.nom) }}
+            </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group">
             {{ form_label(form.email) }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group">
             {{ form_label(form.message) }}
-            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
-            {{ form_errors(form.message) }}
+            {{ form_widget(form.message) }}
+            <div class="form-error">
+                {{ form_errors(form.message) }}
+            </div>
         </div>
 
-        {{ form_widget(form.envoyer) }}
+        </button>
+
     {{ form_end(form) }}
 </div>
 {% endblock %}

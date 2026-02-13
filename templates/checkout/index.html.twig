@@ -143,5 +143,17 @@ button[type="submit"]:hover {
       Total : {{ total|number_format(2, ',', ' ') }} €
     </div>
   </div>
+   <div>
+            {% if app.user %}
+    <a href="{{ path('checkout') }}" class="btn btn-success">
+        Passer la commande
+    </a>
+{% else %}
+    <a href="{{ path('app_login') }}" class="btn btn-outline-primary">
+        Connectez-vous pour passer commande
+    </a>
+{% endif %}
+
+            </div>
 </div>
 {% endblock %}
