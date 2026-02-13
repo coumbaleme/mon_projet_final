@@ -1,13 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Modifier CategoryTraveaux{% endblock %}
+{% block title %}Modifier CategoryTraveaux{% endblock %}
 
 {% block body %}
+<style>
+.page {
+    background: #f3f6f9;
+    min-height: 80vh;
+    padding: 60px 0;
+    text-align: center;
+}
+.card {
+    background: #f8fbff;
+    width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 12px;
+}
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+label {
+    font-weight: 400;
+    display: block;
+    margin-bottom: 6px;
+}
+input[type="text"] {
+    width: 220px;
+    padding: 6px;
+}
+textarea {
+    width: 260px;
+    height: 80px;
+}
+button {
+    background: #4f8ef7;
+    border: none;
+    padding: 8px 20px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.back {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 18px;
+    border: 1px solid #cfe2ff;
+    border-radius: 8px;
+    color: #3b78db;
+    text-decoration: none;
+}
+</style>
+
+<div class="page">
     <h1>Modifier CategoryTraveaux</h1>
 
-    {{ include('category_traveaux/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="card">
+        {{ form_start(form) }}
 
-    <a href="{{ path('app_category_traveaux_index') }}">Retour à la liste</a>
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
 
-    {{ include('category_traveaux/_delete_form.html.twig') }}
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.image) }}
+            {{ form_widget(form.image) }}
+        </div>
+
+        <button>Update</button>
+
+        {{ form_end(form) }}
+    </div>
+
+    <a href="{{ path('app_category_traveaux_index') }}" class="back">
+        Back to list
+    </a>
+</div>
 {% endblock %}

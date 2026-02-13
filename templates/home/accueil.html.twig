@@ -1,175 +1,181 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil – BTP Consulting{% endblock %}
+{% block title %}Accueil – BTP Consulting
+{% endblock %}
 
 {% block stylesheets %}
-<style>
-
-</style>
+	  <link rel="stylesheet" href="{{ asset('assets/styles/accueil/heroAccueil.css') }}">
 {% endblock %}
 
 {% block body %}
 
-<section class="hero">
-  <div class="hero-text">
-    <h1>Nous sommes parmi les meilleures entreprises de construction</h1>
-    <p>Excellence, innovation et sécurité pour tous vos projets de construction.</p>
-    <a href="#services">Découvrir nos services</a>
-  </div>
-  <div class="hero-img">
-    <img src="https://cdn.prod.website-files.com/62987134cee3f41ed59eeb9d/63073870dfc361717234e245_mini-pelle-5t.png" alt="Engin de chantier">
-  </div>
-</section>
+	<section class="hero">
+		<div class="hero-container">
+			<div class="hero-text">
+				<h1>L'excellence au service de <span>vos projets BTP</span></h1>
+				<p>Nous transformons vos ambitions en réalité avec des solutions innovantes, durables et sur mesure pour tous vos besoins en construction.</p>
+				<div class="hero-buttons">
+					<a href="#produits" class="btn-primary">
+						<span>🛒</span> Découvrir nos produits
+					</a>
+					<a href="#services" class="btn-secondary">
+						<span>📋</span> Nos services
+					</a>
+				</div>
+			</div>
+			<div class="hero-img">
+				<img src="https://cdn.prod.website-files.com/62987134cee3f41ed59eeb9d/63073870dfc361717234e245_mini-pelle-5t.png" alt="Engin de chantier">
+			</div>
+		</div>
+	</section>
 
-<!-- SECTION PRODUITS -->
-<section id="produits">
-  <h2>Nos Produits</h2>
+	<!-- SECTION PRODUITS -->
+	<section id="produits">
+		<h2>Nos Produits</h2>
+		<p class="section-subtitle">Découvrez notre gamme d'équipements et matériels de qualité professionnelle</p>
 
-  {% if product is not empty %}
-    <div id="produitsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="400">
-      <div class="carousel-inner">
-        {% for produit in product %}
-          <div class="carousel-item {% if loop.first %}active{% endif %}">
-            <div class="d-flex justify-content-center">
-              <div style="background:white; width:85%; max-width:500px; padding:1.5rem; border-radius:12px; text-align:center; box-shadow:0 3px 10px rgba(0,0,0,0.15);">
-                {% if produit.image %}
-                  <img src="{{ asset('images/product_image/' ~ produit.image) }}" alt="{{ produit.titre }}" style="width:100%; height:350px; object-fit:cover; border-radius:8px;">
-                {% else %}
-                  <img src="{{ asset('images/placeholder.png') }}" alt="Image non disponible" style="width:100%; height:350px; object-fit:cover; border-radius:8px; opacity:0.6;">
-                {% endif %}
-                <h3 style="margin:1rem 0; color:#ff6600;">{{ produit.titre }}</h3>
-                {% if produit.stock < 3 %}
-                  <p class="text-danger fw-bold mb-2">Bientôt rupture de stock</p>
-                {% endif %}
-                <p style="font-size:0.95rem; color:#555;">
-                  {{ produit.description|length > 150 ? produit.description|slice(0,150) ~ '...' : produit.description }}
-                </p>
-                <form action="{{ path('cart_add', { id: produit.id }) }}" method="post" style="margin-top:1rem;">
-                  <input type="hidden" name="_token" value="{{ csrf_token('add_to_cart_' ~ produit.id) }}">
-                  <div style="display:flex; justify-content:center; align-items:center; gap:0.5rem;">
-                    <label for="qty_{{ produit.id }}" style="font-weight:bold;">Quantité :</label>
-                    <input id="qty_{{ produit.id }}" type="number" name="quantity" max="{{ produit.stock }}" min="1" value="1" style="width:70px; text-align:center;">
-                    <button type="submit" class="btn btn-warning fw-bold text-white">Ajouter au panier</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
+		{% if product is not empty %}
+			<div class="products-grid">
+				{% for produit in product %}
+					<div class="product-card">
+						{# Image du produit #}
+						<div class="product-image-container">
+							{% if produit.image %}
+								<img src="{{ asset('images/product_image/' ~ produit.image) }}" alt="{{ produit.titre }}" class="product-image">
+							{% else %}
+								<img src="{{ asset('images/placeholder.png') }}" alt="Image non disponible" class="product-image" style="opacity:0.6;">
+							{% endif %}
+							
+							{% if produit.stock < 3 %}
+								<div class="product-badge">⚡ Stock limité</div>
+							{% endif %}
+						</div>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#produitsCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter:invert(1);"></span>
-        <span class="visually-hidden">Précédent</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#produitsCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true" style="filter:invert(1);"></span>
-        <span class="visually-hidden">Suivant</span>
-      </button>
-    </div>
-  {% else %}
-    <p class="text-center text-white">Aucun produit disponible pour le moment.</p>
-  {% endif %}
-</section>
+						{# Contenu de la carte #}
+						<div class="product-content">
+							<h3 class="product-title">{{ produit.titre }}</h3>
 
-<!-- STATS -->
-<section class="stats-container">
-  <div>
-    <div class="stats">+ 30</div>
-    <p>chantiers actifs</p>
-  </div>
-  <div>
-    <div class="stats">15 000 m²</div>
-    <p>construits/an</p>
-  </div>
-  <div>
-    <div class="stats">20</div>
-    <p>labels qualité</p>
-  </div>
-  <div>
-    <div class="stats">Certifié</div>
-    <p>Carte BTP</p>
-  </div>
-</section>
+							{# Alerte stock #}
+							{% if produit.stock < 3 %}
+								<div class="stock-warning">
+									⚠️ Plus que {{ produit.stock }} en stock
+								</div>
+							{% endif %}
 
-<!-- SERVICES -->
-<section id="services">
-  <h2 class="section-title">Nos services</h2>
-  <p class="intro">
-    Nous proposons des solutions complètes pour vos projets de construction, rénovation et infrastructures, avec un engagement fort en qualité et sécurité.
-  </p>
-  <div class="services-grid">
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2721/2721298.png" alt="Construction">
-      <h3>Construction</h3>
-      <p>Bâtiments modernes, durables et performants.</p>
-    </div>
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3522/3522280.png" alt="Rénovation">
-      <h3>Rénovation</h3>
-      <p>Modernisation avec respect des normes énergétiques.</p>
-    </div>
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3063/3063807.png" alt="Génie civil">
-      <h3>Génie civil</h3>
-      <p>Routes, ouvrages d’art et grandes infrastructures.</p>
-    </div>
-    <div class="service-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1086/1086475.png" alt="Conseil">
-      <h3>Conseil & Études</h3>
-      <p>Accompagnement technique et études de faisabilité.</p>
-    </div>
-  </div>
-</section>
- {# Bandeau cookies #}
-         
-                <section id="cookieBanner" class="cookie-banner hide">
-                    <p>Ce site utilise des cookies pour améliorer votre expérience.</p>
-                    <button id="acceptCookies" class="btn btn-success">Accepter</button>
-                    <button id="refuseCookies" class="btn btn-danger">Refuser</button>
-                </section>
-         
+							{# Actions #}
+							<div class="product-actions">
+								{# Bouton voir le produit #}
+								<a href="{{ path('product_detail', {'id': produit.id}) }}" class="btn-view-product">
+									<span>👁️</span> Voir les détails
+								</a>
 
-     <style>
-     .hide {
-    display: none;
-  }
-     </style> 
-  <script>
-   
- 
- 
-  // -------------------------------
-  // Bandeau cookies
-  // -------------------------------
-  const banner = document.getElementById('cookieBanner');
-  const acceptBtn = document.getElementById('acceptCookies');
-  const refuseBtn = document.getElementById('refuseCookies');
- 
-  // Vérifie si un choix existe déjà
-  const choice = localStorage.getItem('cookiesChoice');
- 
-  if (!choice) {
-    // Aucun choix → affiche le bandeau
-    banner.classList.remove('hide');
-  } else {
-    // Un choix existe → cache le bandeau
-    banner.classList.add('hide');
-    console.log('Choix des cookies déjà enregistré :', choice);
-  }
- 
-  // Quand l’utilisateur clique sur "Accepter"
-  acceptBtn.onclick = function() {
-    localStorage.setItem('cookiesChoice', 'accepted');
-    banner.classList.add('hide');
-    console.log('Cookies acceptés.');
-  };
- 
-  // Quand l’utilisateur clique sur "Refuser"
-  refuseBtn.onclick = function() {
-    localStorage.setItem('cookiesChoice', 'refused');
-    banner.classList.add('hide');
-    console.log('Cookies refusés.');
-  };
-  </script>
+								{# Formulaire ajout au panier #}
+								<form action="{{ path('cart_add', { id: produit.id }) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token('add_to_cart_' ~ produit.id) }}">
+
+									<div class="quantity-section">
+										<label for="qty_{{ produit.id }}">Qté:</label>
+										<input id="qty_{{ produit.id }}" type="number" name="quantity" max="{{ produit.stock }}" min="1" value="1" class="quantity-input">
+									</div>
+
+									<button type="submit" class="btn-add-cart">
+										<span>🛒</span> Ajouter au panier
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<p class="no-products" style="text-align: center; color: var(--gray); font-size: 1.2rem; padding: 3rem;">
+				Aucun produit disponible pour le moment.
+			</p>
+		{% endif %}
+	</section>
+
+	<!-- STATS -->
+	<section class="stats-container">
+		<div>
+			<div class="stats">30+</div>
+			<p>Chantiers actifs</p>
+		</div>
+		<div>
+			<div class="stats">15K m²</div>
+			<p>Construits par an</p>
+		</div>
+		<div>
+			<div class="stats">20</div>
+			<p>Labels qualité</p>
+		</div>
+		<div>
+			<div class="stats">✓</div>
+			<p>Certifié Carte BTP</p>
+		</div>
+	</section>
+
+	<!-- SERVICES -->
+	<section id="services">
+		<h2 class="section-title">Nos Services</h2>
+		<p class="intro">
+			Nous proposons des solutions complètes pour vos projets de construction, rénovation et infrastructures, avec un engagement fort en qualité et sécurité.
+		</p>
+		<div class="services-grid">
+			<div class="service-card">
+				<img src="https://cdn-icons-png.flaticon.com/512/2721/2721298.png" alt="Construction">
+				<h3>Construction</h3>
+				<p>Bâtiments modernes, durables et performants pour tous vos projets.</p>
+			</div>
+			<div class="service-card">
+				<img src="https://cdn-icons-png.flaticon.com/512/3522/3522280.png" alt="Rénovation">
+				<h3>Rénovation</h3>
+				<p>Modernisation avec respect des normes énergétiques et environnementales.</p>
+			</div>
+			<div class="service-card">
+				<img src="https://cdn-icons-png.flaticon.com/512/3063/3063807.png" alt="Génie civil">
+				<h3>Génie Civil</h3>
+				<p>Routes, ouvrages d'art et grandes infrastructures de qualité.</p>
+			</div>
+			<div class="service-card">
+				<img src="https://cdn-icons-png.flaticon.com/512/1086/1086475.png" alt="Conseil">
+				<h3>Conseil & Études</h3>
+				<p>Accompagnement technique et études de faisabilité personnalisées.</p>
+			</div>
+		</div>
+	</section>
+
+	{# Bandeau cookies #}
+	<section id="cookieBanner" class="cookie-banner hide">
+		<p>🍪 Ce site utilise des cookies pour améliorer votre expérience.</p>
+		<button id="acceptCookies" class="btn-success">Accepter</button>
+		<button id="refuseCookies" class="btn-danger">Refuser</button>
+	</section>
+
+	<script>
+		// Bandeau cookies
+		const banner = document.getElementById('cookieBanner');
+		const acceptBtn = document.getElementById('acceptCookies');
+		const refuseBtn = document.getElementById('refuseCookies');
+
+		const choice = localStorage.getItem('cookiesChoice');
+
+		if (!choice) {
+			banner.classList.remove('hide');
+		} else {
+			banner.classList.add('hide');
+			console.log('Choix des cookies déjà enregistré :', choice);
+		}
+
+		acceptBtn.onclick = function () {
+			localStorage.setItem('cookiesChoice', 'accepted');
+			banner.classList.add('hide');
+			console.log('Cookies acceptés.');
+		};
+
+		refuseBtn.onclick = function () {
+			localStorage.setItem('cookiesChoice', 'refused');
+			banner.classList.add('hide');
+			console.log('Cookies refusés.');
+		};
+	</script>
 {% endblock %}

@@ -2,136 +2,167 @@
 
 {% block title %}Votre panier{% endblock %}
 
-{% block body %}
-  {# <section class="cart">
-    <h1>🛒 Votre panier</h1>
-
-    {% if cart is empty %}
-      <p>Votre panier est vide.</p>
-      <a href="{{ path('app_accueil') }}" class="btn">← Continuer vos achats</a>
-    {% else %}
-      <table class="cart-table">
-        <thead>
-          <tr>
-            <th>Produit</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for id, item in cart %}
-            {% set subtotal = item.prix * item.quantity %}
-            <tr>
-              <td>
-                <img src="{{ item.image }}" alt="{{ item.titre }}" class="cart-img">
-                {{ item.titre }}
-              </td>
-              <td>{{ item.prix }} €</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ subtotal }} €</td>
-              <td>
-                <a href="{{ path('app_cart_remove', {id: id}) }}" class="btn-remove">🗑️</a>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-      <div class="cart-footer">
-        <h3>Total : {{ total }} €</h3>
-        <a href="{{ path('app_cart_clear') }}" class="btn-clear">Vider le panier</a>
-      </div>
-    {% endif %}
-  </section>
-
- #}
-
-
-  <h1>Panier</h1>
-<table>
-<thead>
-<tr><th>Produit</th><th>Qté</th><th>PU</th><th>Total</th><th> </th></tr>
-</thead>
-<tbody>
-{% for l in lines %}
-<tr>
-{# <td>{{ l.name }}</td> #}
-<td>
-<form action="{{ path('cart_update', { id: l.id }) }}" method="post">
-<input type="number" name="qty" min="0" value="{{ l.quantity }}">
-<button type="submit">OK</button>
-</form>
-</td>
-<td>{{ (l.unitPrice)|number_format(2, ',', ' ') }} €</td>
-<td>{{ (l.lineTotal)|number_format(2, ',', ' ') }} €</td>
-<td>
-<form action="{{ path('cart_remove', { id: l.id }) }}" method="post">
-<button type="submit">Supprimer</button>
-</form>
-</td>
-</tr>
-{% else %}
-<tr><td colspan="5">Panier vide</td></tr>
-{% endfor %}
-</tbody>
-</table>
-<p>Total : <strong>{{ (total/100)|number_format(2, ',', ' ') }} €</strong></p>
-{% if total > 0 %}
-<a href="{{ path('checkout') }}">Passer la commande</a>
-{% endif %}
-{% endblock %}  
-
 {% block stylesheets %}
 <style>
-  .cart {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  .cart-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .cart-table th, .cart-table td {
-    border-bottom: 1px solid #eee;
-    padding: 10px;
-    text-align: center;
-  }
-  .cart-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 6px;
-    object-fit: cover;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  .btn, .btn-remove, .btn-clear {
-    background: #ff6600;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-  .btn:hover, .btn-remove:hover, .btn-clear:hover {
-    background: #cc5200;
-  }
-  .btn-remove {
-    background: #e74c3c;
-  }
-  .btn-clear {
-    background: #555;
-  }
-  .cart-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
+    /* ===== Layout simple ===== */
+    .cart-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    /* ===== Table ===== */
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .cart-table th {
+        background: #f5f5f5;
+        text-align: left;
+    }
+
+    .cart-product {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cart-product img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    /* ===== Quantity ===== */
+    .qty-form {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .qty-form input {
+        width: 60px;
+        padding: 4px;
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+        padding: 8px 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #2c7be5;
+        color: #fff;
+        border-color: #2c7be5;
+    }
+
+    .btn-danger {
+        background: #e5533d;
+        color: #fff;
+        border-color: #e5533d;
+    }
+
+    /* ===== Footer ===== */
+    .cart-footer {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* ===== Empty ===== */
+    .cart-empty {
+        text-align: center;
+        padding: 30px;
+        color: #666;
+    }
 </style>
+{% endblock %}
+
+{% block body %}
+<div class="cart-container">
+    <h1>Votre panier</h1>
+
+    {% if lines is empty %}
+        <div class="cart-empty">
+            <p>Votre panier est vide.</p>
+            <a href="{{ path('app_accueil') }}" class="btn">
+                ← Continuer vos achats
+            </a>
+        </div>
+    {% else %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Qté</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in lines %}
+                    <tr>
+                        <td>
+                            <div class="cart-product">
+                                <img
+                                    src="{{ asset('images/product_image/' ~ l.image) }}"
+                                    alt="{{ l.titre }}"
+                                >
+                                {{ l.titre }}
+                            </div>
+                        </td>
+
+                        <td>
+                            <form action="{{ path('cart_update', { id: l.id }) }}" method="post" class="qty-form">
+                                <input type="number" name="qty" min="1" value="{{ l.quantity }}">
+                                <button type="submit" class="btn">OK</button>
+                            </form>
+                        </td>
+
+                        <td>
+                            {{ l.lineTotal|number_format(2, ',', ' ') }} €
+                        </td>
+
+                        <td>
+                            <form action="{{ path('cart_remove', { id: l.id }) }}" method="post">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cart-footer">
+            <strong>Total : {{ total|number_format(2, ',', ' ') }} €</strong>
+
+            {% if total > 0 %}
+                <a href="{{ path('checkout') }}" class="btn btn-primary">
+                    Passer la commande
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

@@ -13,7 +13,7 @@ class CartController extends AbstractController
 {
 
     // 👉 Cette action ajoute un produit dans le panier stocké en session.
-    #[Route('/cart/add/{id}', name: 'cart_add', methods: ['POST'])]
+    #[Route('/cart/add/{id}', name:'cart_add', methods: ['POST'])]
     public function add(
         int $id,                      // ID du produit passé dans l'URL
         Request $request,            // Pour récupérer la quantité envoyée en POST
@@ -53,7 +53,8 @@ class CartController extends AbstractController
                 'titre' => $p->getTitre(),
                 'unitPrice' => $p->getPrix(),     // en centimes (int)
                 'quantity' => $qty,
-                'lineTotal' => $qty * $p->getPrix()
+                'lineTotal' => $qty * $p->getPrix(), // total ligne en centimes
+                'image' => $p->getImage()
             ];
          
             $total += $qty * $p->getPrix();
