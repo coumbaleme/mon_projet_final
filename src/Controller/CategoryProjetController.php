@@ -43,7 +43,7 @@ final class CategoryProjetController extends AbstractController
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
                 try {
                     $imageFile->move(
-                        $this->getParameter('images_directory'),
+                        $this->getParameter('images_projet'),
                         $newFilename
                     );
                      $categoryProjet ->setImage($newFilename);
@@ -78,7 +78,21 @@ final class CategoryProjetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+                $imageFile = $form->get('image')->getData();
+                if ($imageFile) {
+                    $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                    try {
+                        $imageFile->move(
+                            $this->getParameter('images_projet'),
+                            $newFilename
+                        );
+                        $categoryProjet->setImage($newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('danger', 'Erreur lors du téléchargement de l\'image.');
+                    }
+                }
             $entityManager->flush();
+            
 
             return $this->redirectToRoute('app_category_projet_index', [], Response::HTTP_SEE_OTHER);
         }

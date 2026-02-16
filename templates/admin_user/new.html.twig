@@ -1,11 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau AdminUserController{% endblock %}
+{% block title %}Créer un utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Creer nouveau AdminUserController</h1>
+<style>
+/* Styles simples et propres */
+body {
+    background-color: #f8f9fa;
+}
 
-    {{ include('admin_user/_form.html.twig') }}
+.form-control {
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 16px;
+}
 
-    <a href="{{ path('app_admin_user_index') }}">Retour à la liste</a>
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
+    outline: none;
+}
+
+.btn-primary {
+    border-radius: 25px;
+    padding: 8px 16px;
+}
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h1 class="h3 mb-3 text-primary">Nouvel utilisateur</h1>
+            <p class="text-muted small mb-4">Remplissez les informations ci-dessous</p>
+
+            {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.email, 'Adresse email') }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.username, 'Nom d’utilisateur') }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.username) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.password, 'Mot de passe') }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.password) }}
+            </div>
+
+            <div class="d-grid mt-3">
+                <button class="btn btn-primary"> Enregistrer</button>
+            </div>
+
+            {{ form_end(form) }}
+
+            <div class="mt-3">
+                <a href="{{ path('app_admin_user_index') }}">← Retour à la liste</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

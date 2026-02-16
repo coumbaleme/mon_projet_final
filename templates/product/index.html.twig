@@ -15,6 +15,7 @@
                 <th>Image</th>
                 <th>actions</th>
                   <th>stock</th>
+                  <th>suprimer </th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,8 @@
                     <a href="{{ path('product_edit', {'id': index.id}) }}">Modifier</a>
                     <td>{{ index.stock }}</td>
                 </td>
+                <td>
+                    {{ include('product/_delete_form.html.twig') }}
             </tr>
         {% else %}
             <tr>
