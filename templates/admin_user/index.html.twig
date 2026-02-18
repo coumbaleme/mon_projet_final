@@ -23,6 +23,7 @@
 								<th scope="col">Email</th>
 								<th scope="col">Vérifié</th>
 								<th scope="col" class="text-center">Actions</th>
+								<th scope="col" class="text-center">Supprimer</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -30,6 +31,8 @@
 								<tr>
 									<td class="fw-semibold text-secondary">{{ user.id }}</td>
 									<td class="text-white">{{ user.email }}</td>
+								
+									<th
 									<td>
 										{% if user.isVerified %}
 											<span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
@@ -52,7 +55,14 @@
 											<i class="bi bi-pencil-square"></i>
 											Modifier
 										</a>
+										</a>
+										<a href="{{ path('app_admin_user_delete', {'id': user.id}) }}" class="btn btn-sm btn-outline-danger">
+											<i class="bi bi-trash"></i>
+											Supprimer
+										</a>
+									
 									</td>
+	{{ include('admin_user/_delete_form.html.twig') }}
 								</tr>
 							{% else %}
 								<tr>
