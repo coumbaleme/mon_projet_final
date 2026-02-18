@@ -1,157 +1,114 @@
-{% block title %}Gestion des utilisateurs
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="card table-card-dark shadow-lg border-0">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h4 fw-bold text-light mb-0">
+                    👥 Gestion des utilisateurs
+                </h1>
+                <a href="{{ path('app_admin_user_new') }}" class="btn btn-primary d-flex align-items-center gap-2">
+                    <i class="bi bi-person-plus-fill"></i>
+                    <span>Créer un utilisateur</span>
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table align-middle table-hover beautiful-table-dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Email</th>
+                            <th>Vérifié</th>
+                            <th class="text-center">Actions</th>
+                            <th class="text-center">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td class="fw-semibold text-secondary">{{ user.id }}</td>
+                                <td class="text-white">{{ user.email }}</td>
+                                <td>
+                                    {% if user.isVerified %}
+                                        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                                            <i class="bi bi-check-circle me-1"></i> Oui
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
+                                            <i class="bi bi-x-circle me-1"></i> Non
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-info me-2">
+                                        <i class="bi bi-eye"></i> Voir
+                                    </a>
+                                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-pencil-square"></i> Modifier
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    {{ include('admin_user/_delete_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    Aucun utilisateur trouvé.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
-{% block admin_content %}
-	<div class="container my-5">
-		<div class="card table-card-dark shadow-lg border-0">
-			<div class="card-body p-4">
-				<div class="d-flex justify-content-between align-items-center mb-4">
-					<h1 class="h4 fw-bold text-light mb-0">
-						👥 Gestion des utilisateurs
-					</h1>
-					<a href="{{ path('app_admin_user_new') }}" class="btn btn-primary d-flex align-items-center gap-2">
-						<i class="bi bi-person-plus-fill"></i>
-						<span>Créer un utilisateur</span>
-					</a>
-				</div>
+{% block stylesheets %}
+<style>
+body {
+    background-color: #729fbd;
+    color: #e4e6eb;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
 
-				<div class="table-responsive">
-					<table class="table align-middle table-hover beautiful-table-dark">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Email</th>
-								<th scope="col">Vérifié</th>
-								<th scope="col" class="text-center">Actions</th>
-								<th scope="col" class="text-center">Supprimer</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for user in users %}
-								<tr>
-									<td class="fw-semibold text-secondary">{{ user.id }}</td>
-									<td class="text-white">{{ user.email }}</td>
-								
-									<th
-									<td>
-										{% if user.isVerified %}
-											<span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
-												<i class="bi bi-check-circle me-1"></i>
-												Oui
-											</span>
-										{% else %}
-											<span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
-												<i class="bi bi-x-circle me-1"></i>
-												Non
-											</span>
-										{% endif %}
-									</td>
-									<td class="text-center">
-										<a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-info me-2">
-											<i class="bi bi-eye"></i>
-											Voir
-										</a>
-										<a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-warning">
-											<i class="bi bi-pencil-square"></i>
-											Modifier
-										</a>
-										</a>
-										<a href="{{ path('app_admin_user_delete', {'id': user.id}) }}" class="btn btn-sm btn-outline-danger">
-											<i class="bi bi-trash"></i>
-											Supprimer
-										</a>
-									
-									</td>
-	{{ include('admin_user/_delete_form.html.twig') }}
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="4" class="text-center text-muted py-4">
-										Aucun utilisateur trouvé.
-									</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+.table-card-dark {
+    background: #cacbce;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2a2e36;
+}
 
-	<style>
-		/* 🌙 Dark Mode — Style élégant pour ton tableau admin */
+.beautiful-table-dark {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
 
-		body {
-			background-color: #729fbdff;
-			color: #e4e6eb;
-			font-family: 'Segoe UI', Roboto, sans-serif;
-		}
+.beautiful-table-dark thead {
+    background: linear-gradient(to right, #007bff, #6610f2);
+    color: #fff;
+}
 
-		.table-card-dark {
-			background: #cacbceff;
-			border-radius: 16px;
-			overflow: hidden;
-			border: 1px solid #2a2e36;
-		}
+.beautiful-table-dark th {
+    border: none;
+    font-weight: 600;
+    padding: 14px;
+}
 
-		.beautiful-table-dark {
-			border-collapse: separate;
-			border-spacing: 0 8px;
-		}
+.beautiful-table-dark tr {
+    background-color: #222631;
+    transition: all 0.25s ease-in-out;
+}
 
-		.beautiful-table-dark thead {
-			background: linear-gradient(to right, #007bff, #6610f2);
-			color: #fff;
-			border-bottom: 2px solid #333;
-		}
-
-		.beautiful-table-dark th {
-			border: none;
-			font-weight: 600;
-			padding: 14px;
-		}
-
-		.beautiful-table-dark tr {
-			background-color: #222631;
-			transition: all 0.25s ease-in-out;
-		}
-
-		.beautiful-table-dark tr:hover {
-			background-color: #2c3342;
-			transform: scale(1.01);
-		}
-
-		.beautiful-table-dark td {
-			border-top: none;
-			padding: 12px 14px;
-			color: #d8d8d8;
-			vertical-align: middle;
-		}
-
-		.beautiful-table-dark .btn {
-			border-radius: 8px;
-			transition: all 0.2s ease;
-		}
-
-		.beautiful-table-dark .btn-outline-info:hover {
-			background-color: #0dcaf0;
-			color: #000;
-		}
-
-		.beautiful-table-dark .btn-outline-warning:hover {
-			background-color: #ffc107;
-			color: #000;
-		}
-
-		.badge {
-			font-size: 0.85rem;
-			font-weight: 500;
-			border-radius: 10px;
-		}
-
-		.card:hover {
-			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-		}
-
-	</style>
+.beautiful-table-dark tr:hover {
+    background-color: #2c3342;
+    transform: scale(1.01);
+}
+</style>
 {% endblock %}
