@@ -1,0 +1,34 @@
+	/* Responsive */
+@media (max-width: 768px) {
+
+    .hero-container {
+        display: flex;
+        flex-direction: column; /* Passe en colonne */
+        text-align: center;
+    }
+
+    .products-grid {
+        display: flex;
+        flex-direction: column; /* Produits empilés */
+        gap: 20px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Tablette */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .products-grid > div {
+        flex: 0 0 calc(50% - 20px); /* 2 colonnes */
+    }
+}

@@ -31,7 +31,7 @@
                         {% for user in users %}
                             <tr>
                                 <td class="fw-semibold text-secondary">{{ user.id }}</td>
-                                <td class="text-white">{{ user.email }}</td>
+                                <td class="text-success">{{ user.email }}</td>
                                 <td>
                                     {% if user.isVerified %}
                                         <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
@@ -72,10 +72,17 @@
 
 {% block stylesheets %}
 <style>
+
+
+
 body {
     background-color: #729fbd;
     color: #e4e6eb;
     font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.text-green {
+
 }
 
 .table-card-dark {

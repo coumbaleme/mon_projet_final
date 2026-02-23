@@ -1,0 +1,119 @@
+:root {
+  --primary: #003366;
+  --accent: #dd6719;
+  --text: #222;
+  --bg: #f7f7f7;
+}
+body {
+  margin: 0;
+
+  font-family: sans-serif;
+  color: var(--text);
+  line-height: 1.5;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+
+}
+        main {
+            flex: 1;
+        }
+
+/* HERO */
+/* .hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f4f8;
+  padding: 3em;
+}
+.hero-text { flex: 1; }
+.hero-text h1 { font-size: 2.5rem; margin-bottom: 0.5em; }
+.hero-text p { font-size: 1.1rem; margin-bottom: 1.5em; }
+.hero-text a {
+  display: inline-block;
+  padding: 0.8em 2em;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.hero-img { flex: 1; }
+.hero-img img { width: 100%; border-radius: 8px; }
+
+/* PRODUITS */
+#produits {
+  padding: 3rem 1rem;
+  background: #87aff5ff;
+}
+
+
+#produits h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+} */
+
+/* STATS */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  background: #fff;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.stats {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+
+
+
+		/* Cookie Banner */
+		.cookie-banner {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: var(--dark);
+			color: white;
+			padding: 1.5rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 2rem;
+			box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+			z-index: 1000;
+		}
+
+		.cookie-banner p {
+			margin: 0;
+			font-size: 1rem;
+		}
+
+		.cookie-banner button {
+			padding: 0.7rem 1.5rem;
+			border: none;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.cookie-banner .btn-success {
+			background: var(--accent-color);
+			color: var(--dark);
+		}
+
+		.cookie-banner .btn-danger {
+			background: transparent;
+			color: white;
+			border: 2px solid white;
+		}
+
+		.hide {
+			display: none;
+		}
