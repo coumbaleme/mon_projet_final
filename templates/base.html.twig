@@ -1,209 +1,234 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}BTP_Consulting{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="BTP_Consulting - Votre partenaire de confiance">
-    {# <link rel="stylesheet" href="{{ asset('styles.css') }}"> #}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}BTP_Consulting
+			{% endblock %}
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+		name="description" content=" {% block description %}BTP_Consulting - Votre partenaire de confiance{% endblock %} ">
+		{# <link rel="stylesheet" href="{{ asset('styles.css') }}"> #}
 
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}">
+		<link rel="icon" href="{{ asset('images/logo.jpg') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
+		<link rel="stylesheet" href="{{ asset('assets/styles/accueil/accueil.css') }}">
 
-      <link rel="stylesheet" href="{{ asset('assets/styles/accueil/accueil.css') }}">
 
-            
-      <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}"> {% block stylesheets %}{% endblock %}
 
-       
-    {% block stylesheets %}
-    
-    {% endblock %}
-    
-</head>
+		</head>
 
-   
 
-<body>
+		<body>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ path('app_homepage') }}">
-                <img src="{{ asset('images/logo.jpg') }}" alt="BTP_Consulting" width="50">
-            </a>
+			<header>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<div class="container">
+						<a class="navbar-brand" href="{{ path('app_homepage') }}">
+							<img src="{{ asset('images/logo.jpg') }}" alt="BTP_Consulting" width="50">
+						</a>
 
-            <ul class="navbar-nav me-auto">
-                
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil') }}">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_profile') }}">Profil</a></li>
-               <li class="nav-item"><a class="nav-link" href="{{ path('app_apropos') }}">A propos</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
+						<ul class="navbar-nav me-auto">
 
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_admin_user_index') }}">Admin</a></li>
-                {% endif %}
-            </ul>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_accueil') }}">Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_profile') }}">Profil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_apropos') }}">A propos</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+							</li>
 
-            <div class="d-flex align-items-center">
-                <a href="{{ path('cart_show') }}" class="btn btn-outline-light me-2">🛒</a>
+							{% if is_granted('ROLE_ADMIN') %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_admin_user_index') }}">Admin</a>
+								</li>
+							{% endif %}
+						</ul>
 
-                {% if app.user %}
+						<div class="d-flex align-items-center">
+							<a href="{{ path('cart_show') }}" class="btn btn-outline-light me-2">🛒</a>
 
-                {% else %}
-                    <a href="{{ path('app_inscription') }}" class="btn btn-outline-light me-2">S’inscrire</a>
-                    <a href="{{ path('app_login') }}" class="btn btn-warning">Connexion</a>
-                {% endif %}
-            </div>
-        </div>
-        
-        
-    </nav>
+							{% if app.user %}
 
-    {# Barre Admin visible seulement pour les administrateurs #}
-   {% if is_granted('ROLE_ADMIN') %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <div class="container-fluid">
-        <!-- Logo / Brand -->
-        <a class="navbar-brand fw-bold" href="{{ path('app_admin_user_index') }}">
-            Admin Panel
-        </a>
+								{% else %}
+									<a href="{{ path('app_inscription') }}" class="btn btn-outline-light me-2">S’inscrire</a>
+									<a href="{{ path('app_login') }}" class="btn btn-warning">Connexion</a>
+							{% endif %}
+						</div>
+					</div>
 
-        <!-- Toggle pour mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <!-- Menu -->
-        <div class="collapse navbar-collapse" id="adminNavbar">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+				</nav>
 
-                <!-- Dropdown Pages Admin -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="pagesAdminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pages Admin
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pagesAdminDropdown">
-                        <li><a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a></li>
-                        <li><a class="dropdown-item" href="{{ path('product_index')|default('#') }}">Produits</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_category_traveaux_index')|default('#') }}">Travaux</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_category_metier_index')|default('#') }}">Métiers</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_category_projet_index')|default('#') }}">Projets</a></li>
-                    </ul>
-                </li>
+				{# Barre Admin visible seulement pour les administrateurs #}
+				{% if is_granted('ROLE_ADMIN') %}
+					<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+						<div
+							class="container-fluid">
+							<!-- Logo / Brand -->
+							<a class="navbar-brand fw-bold" href="{{ path('app_admin_user_index') }}">
+								Admin Panel
+							</a>
 
-                <!-- Bouton déconnexion -->
-                <li class="nav-item ms-lg-3">
-                    <a href="{{ path('app_logout') }}" class="btn btn-warning fw-bold text-dark">
-                        Se déconnecter
-                    </a>
-                </li>
-            </ul>
-           
-        </div>
-        
-    </div>
-</nav>
-{% endif %}
+							<!-- Toggle pour mobile -->
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
 
-</header>
+							<!-- Menu -->
+							<div class="collapse navbar-collapse" id="adminNavbar">
+								<ul
+									class="navbar-nav ms-auto align-items-lg-center">
 
-<main class="container mt-4">
-    {% block body %}{% endblock %}
-</main>
+									<!-- Dropdown Pages Admin -->
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" id="pagesAdminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+											Pages Admin
+										</a>
+										<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pagesAdminDropdown">
+											<li>
+												<a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{ path('product_index')|default('#') }}">Produits</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{ path('app_category_traveaux_index')|default('#') }}">Travaux</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{ path('app_category_metier_index')|default('#') }}">Métiers</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{ path('app_category_projet_index')|default('#') }}">Projets</a>
+											</li>
+										</ul>
+									</li>
 
-<footer class="bg-dark text-light mt-5 py-5">
-    <div class="container">
+									<!-- Bouton déconnexion -->
+									<li class="nav-item ms-lg-3">
+										<a href="{{ path('app_logout') }}" class="btn btn-warning fw-bold text-dark">
+											Se déconnecter
+										</a>
+									</li>
+								</ul>
 
-        <div class="row text-center text-md-start">
+							</div>
 
-            <!-- COL 1 : Logo / identité -->
-            <div class="col-md-4 mb-4">
-                <h5 class="text-uppercase fw-bold">BTP Consulting</h5>
-                <p class="small mb-2">
-                    Expertise & accompagnement dans le secteur du BTP.<br>
-                    Professionnalisme, fiabilité et conformité.
-                </p>
-                <p class="small mb-0">
-                    <i class="bi bi-envelope"></i>
-                    <a href="mailto:contact@monsite.com" class="text-light text-decoration-none">
-                        contact@monsite.com
-                    </a>
-                </p>
-            </div>
+						</div>
+					</nav>
+				{% endif %}
 
-            <!-- COL 2 : Liens légaux -->
-            <div class="col-md-4 mb-4">
-                <h5 class="text-uppercase fw-bold">Informations</h5>
-                <ul class="list-unstyled small">
-                    <li class="mb-1">
-                        <i class="bi bi-file-earmark-text"></i>
-                        <a href="{{ path('mention_legal') }}" class="text-light text-decoration-none ms-1">
-                            Mentions légales
-                        </a>
-                    </li>
-                    <li class="mb-1">
-                        <i class="bi bi-shield-lock"></i>
-                        <a href="{{ path('politique_confidentialite') }}" class="text-light text-decoration-none ms-1">
-                            Politique de confidentialité
-                        </a>
-                    </li>
-                    <li class="mb-1">
-                        <i class="bi bi-person-check"></i>
-                        <a href="{{ path('rgpd') }}" class="text-light text-decoration-none ms-1">
-                            RGPD
-                        </a>
-                    </li>
-                    <li>
-                        <i class="bi bi-chat-dots"></i>
-                        <a href="{{ path('app_contact') }}" class="text-light text-decoration-none ms-1">
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-            </div>
+			</header>
 
-            <!-- COL 3 : Réseaux sociaux -->
-            <div class="col-md-4 mb-4">
-                <h5 class="text-uppercase fw-bold">Suivez-nous</h5>
-                <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
-                    <a href="https://www.facebook.com/kalamou.kara.509" class="text-light" aria-label="Facebook">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/moussa-sane" class="text-light" aria-label="LinkedIn">
-                        <i class="bi bi-linkedin"></i>
-                        </a>
-                    <a href="https://www.instagram.com/karakalamou/" class="text-light" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    
-                    </a>
-                    <a href="https://github.com/coumbaleme?tab=repositories" class="text-light" aria-label="Github">
-                        <i class="bi bi-github"></i>
-                    </a>
-                </div>
-            </div>
+			<main class="container mt-4"> {% block body %}{% endblock %}
+				</main>
 
-        </div>
+				<footer class="bg-dark text-light mt-5 py-5">
+					<div class="container">
 
-        <hr class="border-secondary">
+						<div
+							class="row text-center text-md-start">
 
-        <!-- Bas footer -->
-        <div class="text-center small">
-            <p class="mb-1">
-                © {{ "now"|date("Y") }} <strong>BTP Consulting</strong> — Tous droits réservés
-            </p>
-            <p class="mb-0">
-                Conformément au RGPD, vos données personnelles sont protégées.
-            </p>
-        </div>
+							<!-- COL 1 : Logo / identité -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">BTP Consulting</h5>
+								<p class="small mb-2">
+									Expertise & accompagnement dans le secteur du BTP.<br>
+									Professionnalisme, fiabilité et conformité.
+								</p>
+								<p class="small mb-0">
+									<i class="bi bi-envelope"></i>
+									<a href="mailto:contact@monsite.com" class="text-light text-decoration-none">
+										contact@monsite.com
+									</a>
+								</p>
+							</div>
 
-    </div>
-</footer>
+							<!-- COL 2 : Liens légaux -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">Informations</h5>
+								<ul class="list-unstyled small">
+									<li class="mb-1">
+										<i class="bi bi-file-earmark-text"></i>
+										<a href="{{ path('mention_legal') }}" class="text-light text-decoration-none ms-1">
+											Mentions légales
+										</a>
+									</li>
+									<li class="mb-1">
+										<i class="bi bi-shield-lock"></i>
+										<a href="{{ path('politique_confidentialite') }}" class="text-light text-decoration-none ms-1">
+											Politique de confidentialité
+										</a>
+									</li>
+									<li class="mb-1">
+										<i class="bi bi-person-check"></i>
+										<a href="{{ path('rgpd') }}" class="text-light text-decoration-none ms-1">
+											RGPD
+										</a>
+									</li>
+									<li>
+										<i class="bi bi-chat-dots"></i>
+										<a href="{{ path('app_contact') }}" class="text-light text-decoration-none ms-1">
+											Contact
+										</a>
+									</li>
+								</ul>
+							</div>
+
+							<!-- COL 3 : Réseaux sociaux -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">Suivez-nous</h5>
+								<div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+									<a href="https://www.facebook.com/kalamou.kara.509" class="text-light" aria-label="Facebook">
+										<i class="bi bi-facebook"></i>
+									</a>
+									<a href="https://www.linkedin.com/in/moussa-sane" class="text-light" aria-label="LinkedIn">
+										<i class="bi bi-linkedin"></i>
+									</a>
+									<a href="https://www.instagram.com/karakalamou/" class="text-light" aria-label="Instagram">
+										<i class="bi bi-instagram"></i>
+									</a>
+
+								</a>
+								<a href="https://github.com/coumbaleme?tab=repositories" class="text-light" aria-label="Github">
+									<i class="bi bi-github"></i>
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+					<hr
+					class="border-secondary">
+
+					<!-- Bas footer -->
+					<div class="text-center small">
+						<p class="mb-1">
+							©
+							{{ "now"|date("Y") }}
+							<strong>BTP Consulting</strong>
+							— Tous droits réservés
+						</p>
+						<p class="mb-0">
+							Conformément au RGPD, vos données personnelles sont protégées.
+						</p>
+					</div>
+
+				</div>
+			</body>
+		</html>
+	</footer>
