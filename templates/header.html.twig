@@ -1,0 +1,104 @@
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="{{ path('app_homepage') }}">
+				<img src="{{ asset('images/logo.jpg') }}" alt="BTP_Consulting" width="50">
+			</a>
+
+			<ul class="navbar-nav me-auto">
+
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_accueil') }}">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_profile') }}">Profil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_apropos') }}">A propos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+				</li>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_admin_user_index') }}">Admin</a>
+					</li>
+				{% endif %}
+			</ul>
+
+			<div class="d-flex align-items-center">
+				<a href="{{ path('cart_show') }}" class="btn btn-outline-light me-2">🛒</a>
+
+				{% if app.user %}
+					<!-- Bouton déconnexion -->
+					<li class="nav-item ms-lg-3">
+						<a href="{{ path('app_logout') }}" class="btn btn-warning fw-bold text-dark">
+							Se déconnecter
+						</a>
+
+					{% else %}
+						<a href="{{ path('app_inscription') }}" class="btn btn-outline-light me-2">S’inscrire</a>
+						<a href="{{ path('app_login') }}" class="btn btn-warning">Connexion</a>
+					{% endif %}
+				</div>
+			</div>
+
+
+		</nav>
+
+		{# Barre Admin visible seulement pour les administrateurs #}
+		{% if is_granted('ROLE_ADMIN') %}
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+				<div
+					class="container-fluid">
+					<!-- Logo / Brand -->
+					<a class="navbar-brand fw-bold" href="{{ path('app_admin_user_index') }}">
+						Admin Panel
+					</a>
+
+					<!-- Toggle pour mobile -->
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Menu -->
+					<div class="collapse navbar-collapse" id="adminNavbar">
+						<ul
+							class="navbar-nav ms-auto align-items-lg-center">
+
+							<!-- Dropdown Pages Admin -->
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="pagesAdminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Pages Admin
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pagesAdminDropdown">
+									<li>
+										<a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('product_index')|default('#') }}">Produits</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_category_traveaux_index')|default('#') }}">Travaux</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_category_metier_index')|default('#') }}">Métiers</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_category_projet_index')|default('#') }}">Projets</a>
+									</li>
+								</ul>
+							</li>
+
+
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+		</nav>
+	{% endif %}
+
+</header>

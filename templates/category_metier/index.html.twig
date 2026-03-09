@@ -5,8 +5,8 @@
 
 {% block body %}
 	<h1>CategoryMetier </h1>
-
-	<table class="table">
+<div class="table-responsive">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Id</th>
@@ -44,6 +44,6 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
+</div>
 	<a href="{{ path('app_category_metier_new') }}">Créer nouveau</a>
 {% endblock %}

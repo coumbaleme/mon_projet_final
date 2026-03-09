@@ -14,7 +14,15 @@ class CategoryMetier1Type extends AbstractType
     {
          {
         $builder
-            ->add('nom')
+            ->add('nom', null, [
+                'attr' => [
+                    'class' => 'form-control',
+                    
+                ],
+                'label_attr' => [
+                    'style' => 'color:black; font-weight:bold;',
+                ],
+            ])
             ->add('description')
                ->add('image', FileType::class, [
                        'label' => "Image (fichier)",

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/categorie/metier')]
+#[Route('Admin/category/metier')]
 final class CategoryMetierController extends AbstractController
 {
     #[Route(name: 'app_category_metier_index', methods: ['GET'])]
@@ -70,11 +70,15 @@ final class CategoryMetierController extends AbstractController
         return $this->render('category_metier/show.html.twig', [
             'category_metier' => $categoryMetier,
         ]);
+        
     }
 
     #[Route('/{id}/edit', name: 'app_category_metier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CategoryMetier $categoryMetier, EntityManagerInterface $entityManager): Response
     {
+
+
+
         $form = $this->createForm(CategoryMetier1Type::class, $categoryMetier);
         $form->handleRequest($request);
 

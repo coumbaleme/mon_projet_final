@@ -1,0 +1,93 @@
+<footer class="bg-dark text-light mt-5 py-5">
+					<div class="container">
+
+						<div
+							class="row text-center text-md-start">
+
+							<!-- COL 1 : Logo / identité -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">BTP Consulting</h5>
+								<p class="small mb-2">
+									Expertise & accompagnement dans le secteur du BTP.<br>
+									Professionnalisme, fiabilité et conformité.
+								</p>
+								<p class="small mb-0">
+									<i class="bi bi-envelope"></i>
+									<a href="mailto:contact@monsite.com" class="text-light text-decoration-none">
+										contact@monsite.com
+									</a>
+								</p>
+							</div>
+
+							<!-- COL 2 : Liens légaux -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">Informations</h5>
+								<ul class="list-unstyled small">
+									<li class="mb-1">
+										<i class="bi bi-file-earmark-text"></i>
+										<a href="{{ path('mention_legal') }}" class="text-light text-decoration-none ms-1">
+											Mentions légales
+										</a>
+									</li>
+									<li class="mb-1">
+										<i class="bi bi-shield-lock"></i>
+										<a href="{{ path('politique_confidentialite') }}" class="text-light text-decoration-none ms-1">
+											Politique de confidentialité
+										</a>
+									</li>
+									<li class="mb-1">
+										<i class="bi bi-person-check"></i>
+										<a href="{{ path('rgpd') }}" class="text-light text-decoration-none ms-1">
+											RGPD
+										</a>
+									</li>
+									<li>
+										<i class="bi bi-chat-dots"></i>
+										<a href="{{ path('app_contact') }}" class="text-light text-decoration-none ms-1">
+											Contact
+										</a>
+									</li>
+								</ul>
+							</div>
+
+							<!-- COL 3 : Réseaux sociaux -->
+							<div class="col-md-4 mb-4">
+								<h5 class="text-uppercase fw-bold">Suivez-nous</h5>
+								<div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+									<a href="https://www.facebook.com/kalamou.kara.509" class="text-light" aria-label="Facebook">
+										<i class="bi bi-facebook"></i>
+									</a>
+									<a href="https://www.linkedin.com/in/moussa-sane" class="text-light" aria-label="LinkedIn">
+										<i class="bi bi-linkedin"></i>
+									</a>
+									<a href="https://www.instagram.com/karakalamou/" class="text-light" aria-label="Instagram">
+										<i class="bi bi-instagram"></i>
+									</a>
+
+								</a>
+								<a href="https://github.com/coumbaleme?tab=repositories" class="text-light" aria-label="Github">
+									<i class="bi bi-github"></i>
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+					<hr
+					class="border-secondary">
+
+					<!-- Bas footer -->
+					<div class="text-center small">
+						<p class="mb-1">
+							©
+							{{ "now"|date("Y") }}
+							<strong>BTP Consulting</strong>
+							— Tous droits réservés
+						</p>
+						<p class="mb-0">
+							Conformément au RGPD, vos données personnelles sont protégées.
+						</p>
+					</div>
+
+				
+					</footer>

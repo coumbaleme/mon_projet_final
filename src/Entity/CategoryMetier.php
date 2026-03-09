@@ -27,12 +27,7 @@ class CategoryMetier
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'metier')]
-    private Collection $projet;
-
+    
     /**
      * @var Collection<int, Product>
      */

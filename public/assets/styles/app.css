@@ -3,6 +3,7 @@
   --accent: #dd6719;
   --text: #222;
   --bg: #f7f7f7;
+  --transition: all 0.3s ease !important;
 }
 body {
   margin: 0;

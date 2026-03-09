@@ -5,14 +5,29 @@
 {% block body %}
     <h1>CategoryMetier</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category_metier.id }}</td>
-            </tr>
-        </tbody>
-    </table>
+       <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th> 
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ category_metier.id }}</td>
+            <td>{{ category_metier.nom }}</td>
+            <td>{{ category_metier.description }}</td>
+            <td>
+                <img style="width:100px; height:60px;"
+                     src="{{ asset('images/metiers/' ~ category_metier.image) }}"
+                     alt="">
+            </td>
+        </tr>
+    </tbody>
+</table>
 
     <a href="{{ path('app_category_metier_index') }}">Retour à la liste</a>
 

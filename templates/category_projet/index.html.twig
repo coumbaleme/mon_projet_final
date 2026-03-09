@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>CategoryProjet </h1>
-
-    <table class="table">
+<div class="table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <tr>
@@ -28,7 +28,7 @@
                 <td><img style="width: 30px; height: 30px;" src="{{ asset('images/projet/' ~ category_projet.image) }}" alt=""></td>
                 <td>
                 
-                 <a href="{{ path('app_category_metier_show', {'id': category_projet.id}) }}">Afficher</a>
+                 <a href="{{ path('app_category_projet_show', {'id': category_projet.id}) }}">Afficher</a>
                     <a href="{{ path('app_category_projet_edit', {'id': category_projet.id}) }}">Modifier</a>
                 </td>
                 <td>
@@ -41,6 +41,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('app_category_projet_new') }}">Créer nouveau</a>
 {% endblock %}

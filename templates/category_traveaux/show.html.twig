@@ -2,17 +2,36 @@
 
 {% block title %}CategoryTraveaux{% endblock %}
 
+
 {% block body %}
     <h1>CategoryTraveaux</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category_traveaux.id }}</td>
-            </tr>
-        </tbody>
-    </table>
+      <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th> 
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ category_traveaux.id }}</td>
+            <td>{{ category_traveaux.name }}</td>
+            <td>{{ category_traveaux.description }}</td>
+            <td>
+
+                <img style="width:100px; height:60px;"
+                     src="{{ asset('images/product_image/' ~ category_traveaux.image) }}" alt="">
+
+                   
+                    
+            </td>
+        </tr>
+    </tbody>
+</table>
 
     <a href="{{ path('app_category_traveaux_index') }}">Retour à la liste</a>
 
