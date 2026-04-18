@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
-
+ 
 {% block title %}Mon Profil{% endblock %}
-
+ 
 {% block body %}
 <div class="container mt-4">
-
+ 
     <h1 class="mb-3">Profil utilisateur</h1>
-
+ 
     <div class="card p-3 mb-4">
         <p><strong>Email :</strong> {{ app.user.email }}</p>
         <p><strong>Nom d'utilisateur :</strong> {{ app.user.username }}</p>
     </div>
-
+ 
     <h2 class="mt-4">Mes Commandes</h2>
-
+ 
+    <p>{{ resultat }}</p>
+ 
     {% if commandes is not empty %}
         <table class="table table-striped mt-3">
             <thead>
@@ -22,7 +24,7 @@
                     <th>Date</th>
                     <th>Total</th>
                     <th>Paiement</th>
-                    <th>Confirmation</th>
+                 
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +33,7 @@
                     <td>{{ item.id }}</td>
                     <td>{{ item.createdAt ? item.createdAt|date('d/m/Y H:i') : '' }}</td>
                     <td>{{ (item.total / 100) | number_format(2, ',', ' ') }} €</td>
-
+ 
                     <!-- Paiement -->
                    <td>
     {% if item.status == 'paid' %}
@@ -53,7 +55,36 @@
         <span class="badge bg-warning text-dark">Non confirmée</span>
     {% endif %}
 </td>
-
+                </tr>
+ 
+                {% if item.items is not empty %}
+                    {% for orderItem in item.items %}
+                        <tr>
+                            <td colspan="5">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                    <div>
+                                        <strong>{{ orderItem.productName }}</strong>
+                                        <span class="text-muted">x{{ orderItem.quantity }}</span>
+                                        <span class="ms-2">
+                                            {{ (orderItem.unitPrice / 100) | number_format(2, ',', ' ') }} €
+                                        </span>
+                                    </div>
+ 
+                                    <div>
+                                        {% if orderItem.product %}
+                                            <form method="post" action="{{ path('cart_add', {'id': orderItem.product.id}) }}" class="d-inline">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">Recommander</button>
+                                            </form>
+                                        {% else %}
+                                            <span class="text-muted">Produit supprimé</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
@@ -62,3 +93,5 @@
     {% endif %}
 </div>
 {% endblock %}
+ 
+ 
